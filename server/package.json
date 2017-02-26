@@ -1,0 +1,45 @@
+{
+  "name": "BookStore",
+  "version": "1.0.0",
+  "description": "an example of a bookstore management",
+  "author": "Cristian Ramirez Rosas <cristiano.rosetti@gmail.com>",
+  "license": "ISC",
+  "main": "index.js",
+  "standard": {
+    "ignore": [
+      "mock/**.js"
+    ]
+  },
+  "scripts": {
+    "test": "mocha -R spec **/*.spec.js",
+    "start": "node src/index.js",
+    "lint": "standard --verbose | snazzy",
+    "node-debug": "DEBUG=express* nodemon src/index.js",
+    "chrome-debug": "nodemon --debug-brk --inspect src/index.js"
+  },
+  "keywords": [
+    "NodeJS",
+    "Express",
+    "MongoDB"
+  ],
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "should": "^11.2.0",
+    "snazzy": "^6.0.0",
+    "standard": "^8.6.0",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "awilix": "^2.2.3",
+    "body-parser": "^1.16.1",
+    "cors": "^2.8.1",
+    "express": "^4.14.1",
+    "helmet": "^3.4.1",
+    "http-status": "^1.0.1",
+    "joi": "^10.2.2",
+    "mongodb": "^2.1.18",
+    "morgan": "^1.8.1",
+    "spdy": "^3.4.4"
+  }
+}
