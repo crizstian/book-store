@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+const should = require('should')
 const {validate} = require('./')
 
 describe('Schemas Validation', () => {
@@ -17,8 +18,7 @@ describe('Schemas Validation', () => {
 
     validate(bookModel, 'book')
       .then(value => {
-        console.log('validated')
-        console.log(value)
+        should.ok(value)
         done()
       })
       .catch(err => {

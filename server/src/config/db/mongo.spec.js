@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 const {EventEmitter} = require('events')
-const test = require('assert')
+const should = require('should')
 const mongo = require('./mongo')
 const {dbSettings} = require('../config')
 
@@ -13,9 +13,8 @@ describe('Mongo Connection', () => {
 
     mediator.on('db.ready', (db) => {
       db.admin().listDatabases((err, dbs) => {
-        test.equal(null, err)
-        test.ok(dbs.databases.length > 0)
-        console.log(dbs.databases)
+        should.equal(null, err)
+        should.ok(dbs.databases.length > 0)
         db.close()
         done()
       })
