@@ -1,25 +1,45 @@
 'use strict'
 const repository = (container) => {
-  const {database: db, ObjectID: id} = container.cradle
+  const {database: db, ObjectID: Id} = container.cradle
 
   const queryDocument = (options) => {
-    let query = {}
+    const query = {}
     if ('id' in options) {
-      query['_id'] = new id(options.id)
+      query['_id'] = new Id(options.id)
     }
     if ('title' in options) {
       query['title'] = options.title
     }
     if ('author' in options) {
-      query['author'] = { $all: options.author}
+      query['author'] = {
+        $all: options.author
+      }
     }
     if ('price' in options) {
       if ('lower' in options.price) {
-        query['price'] = { $lte: options.price.number}
+        query['price'] = {
+          $lte: options.price.number
+        }
       } else if ('higher' in options.price) {
-        query['price'] = { $gte: options.price.number}
+        query['price'] = {
+          $gte: options.price.number
+        }
       } else {
         query['price'] = options.price.number
+      }
+    }
+
+    return query
+  }
+
+  const updateDocument = (options) => {
+    const query = {
+      $set: {}
+    }
+
+    for (const [key, value] of Object.entries(options)) {
+      if (key !== 'id') {
+        query['$set'][key] = value
       }
     }
 
@@ -40,18 +60,38 @@ const repository = (container) => {
   const findBook = (book) => {
     return new Promise((resolve, reject) => {
       const books = []
+
       const query = queryDocument(book)
+
       const cursor = db.collection('books').find(query)
       const addBook = (book) => {
         books.push(book)
       }
       const sendBooks = (err) => {
         if (err) {
-          reject(new Error('An error occured fetching all movies, err:' + err))
+          reject(new Error('An error occured fetching a book(s), err:' + err))
         }
         resolve(books)
       }
       cursor.forEach(addBook, sendBooks)
+    })
+  }
+
+  const updateBook = (book) => {
+    return new Promise((resolve, reject) => {
+      const query = queryDocument({id: book.id})
+      const update = updateDocument(book)
+
+      console.log('update made')
+      console.log(update)
+      console.log()
+
+      db.collection('books').updateOne(query, update, (err, result) => {
+        if (err) {
+          reject(new Error(`An error occured when updating a book, err: ${err}`))
+        }
+        resolve(result.result)
+      })
     })
   }
 
@@ -62,6 +102,7 @@ const repository = (container) => {
   return Object.create({
     insertBook,
     findBook,
+    updateBook,
     disconnect
   })
 }

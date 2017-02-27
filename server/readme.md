@@ -18,5 +18,6 @@ What is testing ?
 - database connection
 - dependency injection
 - schemas validation
+- repository functions (testing with the async/await specification)
 
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
