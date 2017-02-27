@@ -1,0 +1,78 @@
+<h2>{{title}}</h2>
+
+<form data-abide novalidate>
+  <div data-abide-error class="alert callout" style="display: none;">
+    <p><i class="fi-alert"></i> There are some errors in your form.</p>
+  </div>
+  
+  <div class="row">
+    <div class="medium-6 columns">
+      <label>Title
+        <input type="text" placeholder="title" aria-describedby="exampleHelpText" required pattern="text">
+        <span class="form-error">
+          Yo, you had better fill this out, it's required.
+        </span>
+      </label>
+      <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
+    </div>
+    <div class="medium-6 columns">
+      <label>Author
+        <select id="select" required>
+          <option value=""></option>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </label>
+      <p class="help-text" id="exampleHelpTex">This input is ignored by Abide using `data-abide-ignore`</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="medium-6 columns">
+      <label>Publication
+        <input type="text" placeholder="title" aria-describedby="exampleHelpText" required pattern="text">
+        <span class="form-error">
+          Yo, you had better fill this out, it's required.
+        </span>
+      </label>
+      <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
+    </div>
+    <div class="medium-6 columns">
+      <label>ISBN
+        <input type="text" placeholder="title" aria-describedby="exampleHelpText" required pattern="text">
+        <span class="form-error">
+          Yo, you had better fill this out, it's required.
+        </span>
+      </label>
+      <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="medium-6 columns">
+      <label>Price
+        <input type="text" placeholder="http://foundation.zurb.com" pattern="url">
+      </label>
+    </div>
+    <div class="medium-6 columns">
+      <label>Image
+        <input type="text" placeholder="title" aria-describedby="exampleHelpText" required pattern="text">
+        <span class="form-error">
+          Yo, you had better fill this out, it's required.
+        </span>
+      </label>
+      <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <fieldset class="large-6 columns">
+      <button class="button" type="submit" value="Submit">Submit</button>
+    </fieldset>
+    <fieldset class="large-6 columns">
+      <button class="button" type="reset" value="Reset">Reset</button>
+    </fieldset>
+  </div>
+</form>

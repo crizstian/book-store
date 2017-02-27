@@ -15,7 +15,8 @@ module.exports = (app, repo) => {
 
   app.get('/bookstore', async (req, res, next) => {
     try {
-      const result = await repo.findBook(req.body.book)
+      const book = (req.body.book) ? req.body.book : {}
+      const result = await repo.findBook(book)
       res.status(200).json(result)
     } catch (e) {
       next(e)
