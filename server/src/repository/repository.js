@@ -82,13 +82,22 @@ const repository = (container) => {
       const query = queryDocument({id: book.id})
       const update = updateDocument(book)
 
-      console.log('update made')
-      console.log(update)
-      console.log()
-
       db.collection('books').updateOne(query, update, (err, result) => {
         if (err) {
           reject(new Error(`An error occured when updating a book, err: ${err}`))
+        }
+        resolve(result.result)
+      })
+    })
+  }
+
+  const deleteBook = (book) => {
+    return new Promise((resolve, reject) => {
+      const query = queryDocument({id: book.id})
+
+      db.collection('books').remove(query, (err, result) => {
+        if (err) {
+          reject(new Error(`An error occured when deleting a book, err: ${err}`))
         }
         resolve(result.result)
       })
@@ -103,6 +112,7 @@ const repository = (container) => {
     insertBook,
     findBook,
     updateBook,
+    deleteBook,
     disconnect
   })
 }

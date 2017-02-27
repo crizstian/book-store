@@ -8,11 +8,13 @@ const connect = (options, mediator) => {
         mediator.emit('db.error', err)
       }
 
-      db.admin().authenticate(options.user, options.pass, (err, result) => {
+      db.authenticate(options.user, options.pass, (err, result) => {
         if (err) {
           mediator.emit('db.error', err)
         }
-        mediator.emit('db.ready', db)
+        // after authentication we change to our db
+        const bookstore = db.db(options.db)
+        mediator.emit('db.ready', bookstore)
       })
     })
   })

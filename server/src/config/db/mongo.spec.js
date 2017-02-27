@@ -8,9 +8,6 @@ describe('Mongo Connection', () => {
   it('should emit db Object with an EventEmitter', (done) => {
     const mediator = new EventEmitter()
 
-    // this is only for testing purposes
-    Object.assign(dbSettings, {user: 'cristian', pass: 'admin1', db: 'admin'})
-
     mediator.on('db.ready', (db) => {
       db.admin().listDatabases((err, dbs) => {
         should.equal(null, err)

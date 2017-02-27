@@ -34,6 +34,11 @@ describe('Repository', () => {
     mediator.emit('init')
   })
 
+  after((done) => {
+    test.disconnect()
+    done()
+  })
+
   it('can insert a book into the database', async () => {
     try {
       const book1 = {
