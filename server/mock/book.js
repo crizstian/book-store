@@ -10,14 +10,46 @@ const book = {
   category: 'Programming'
 }
 
-const author = {
-  id: '1',
-  name: 'Cristian Ramirez',
-  description: 'lorem ipsum'
-}
-
 const publisher = {
   id: '1',
   name: 'Medium',
   location: 'Digital'
 }
+
+const authors = [{
+  name: 'Cristian Ramirez',
+  age: 24,
+  description: 'lorem ipsum'
+}, {
+  name: 'Juan Diego Gomez',
+  age: 38,
+  description: 'lorem ipsum'
+}, {
+  name: 'Jurgen Klarick',
+  age: 42,
+  description: 'lorem ipsum'
+}, {
+  name: 'Eric Elliot',
+  age: 40,
+  description: 'lorem ipsum'
+}]
+
+const category = [{
+  name: 'Database'
+}, {
+  name: 'Programming'
+}, {
+  name: 'Finance'
+}, {
+  name: 'Selling'
+}]
+
+const publisher = [{
+  name: "O'rilley"
+}, {
+  name: 'Medium'
+}, {
+  name: 'Alfa'
+}, {
+  name: 'McGraw Hill'
+}]

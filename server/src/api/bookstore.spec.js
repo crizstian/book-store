@@ -36,7 +36,8 @@ describe('Book Store API', () => {
     container.register({
       validate: asValue(models.validate),
       serverSettings: asValue(serverSettings),
-      repo: asValue(testRepo)
+      repo: asValue(testRepo),
+      authorRepo: asValue({testRepo})
     })
 
     return server.start(container)
@@ -62,7 +63,7 @@ describe('Book Store API', () => {
     }
 
     request(app)
-      .post('/booking')
+      .post('/bookstore')
       .send({book})
       .expect((res) => {
         res.body.should.containEql(book)
@@ -70,7 +71,7 @@ describe('Book Store API', () => {
       .expect(200, done)
   })
 
-  it('can call get route', (done) => {
+  it('can get books', (done) => {
     const book = {
       author: ['Cristian Ramirez Rosas'],
       price: {
@@ -79,7 +80,7 @@ describe('Book Store API', () => {
       }
     }
     request(app)
-      .get('/booking')
+      .post('/bookstore/find')
       .send({book})
       .expect((res) => {
         res.body.should.containEql('author')
@@ -94,7 +95,7 @@ describe('Book Store API', () => {
     }
 
     request(app)
-      .put('/booking')
+      .put('/bookstore')
       .send({book})
       .expect((res) => {
         res.body.should.be.instanceof(Array).and.have.lengthOf(2)
@@ -103,13 +104,8 @@ describe('Book Store API', () => {
   })
 
   it('can call delete route', (done) => {
-    const book = {
-      id: '123'
-    }
-
     request(app)
-      .delete('/booking')
-      .send({book})
+      .delete('/bookstore/1')
       .expect((res) => {
         res.body.should.equal(1)
       })

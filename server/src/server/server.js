@@ -8,11 +8,8 @@ const api = require('../api')
 
 const start = (container) => {
   return new Promise((resolve, reject) => {
-    const {serverSettings: {port, ssl}, repo} = container.cradle
+    const {serverSettings: {port, ssl}} = container.cradle
 
-    if (!repo) {
-      reject(new Error('The server must be started with a connected repository'))
-    }
     if (!port) {
       reject(new Error('The server must be started with an available port'))
     }
@@ -31,8 +28,8 @@ const start = (container) => {
       req.container = container.createScope()
       next()
     })
-
-    api(app, repo)
+    const {repo, authorRepo} = container.cradle
+    api(app, {repo, authorRepo})
 
     if (process.env.NODE === 'test') {
       const server = app.listen(port, () => resolve(server))
