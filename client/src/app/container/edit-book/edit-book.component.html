@@ -3,10 +3,6 @@
 </div>
 
 <form  (ngSubmit)="sendBook(edit)" #bookForm="ngForm">
-  <div [hidden]="!bookForm.form.valid || !bookForm.form.pristine" class="alert callout">
-    <p><i class="fi-alert"></i> There are some errors in your form.</p>
-  </div>
-
   <div class="row">
     <div class="small-12 medium-6 columns">
       <label><i class="mdi mdi-layers"></i> Title
@@ -39,11 +35,8 @@
           [(ngModel)]="book.author"
           #author="ngModel"
           >
-            <option value=""></option>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+          <option value="">Select an author</option>
+          <option *ngFor="let author of authors" [ngValue]="author.name">{{author.name}}</option>
         </select>
       </label>
       <div
@@ -66,11 +59,8 @@
           [(ngModel)]="book.category"
           #category="ngModel"
           >
-          <option value=""></option>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+          <option value="">Select a category</option>
+          <option *ngFor="let category of categories" [ngValue]="category.name">{{category.name}}</option>
         </select>
         <div
           class="error"
@@ -91,11 +81,8 @@
           [(ngModel)]="book.publisher"
           #publisher="ngModel"
           >
-          <option value=""></option>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+          <option value="">Select a publisher</option>
+          <option *ngFor="let publisher of publishers" [ngValue]="publisher.name">{{publisher.name}}</option>
         </select>
       </label>
       <div
@@ -186,7 +173,7 @@
         type="submit"
         [disabled]="!bookForm.form.valid"
         >
-          Submit
+          {{action}}
       </button>
     </div>
     <div class="column small-4">

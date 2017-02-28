@@ -1,6 +1,9 @@
 import {Component} from '@angular/core'
 import {Router} from '@angular/router'
 import {BookService} from '../../services'
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'edit-book',
@@ -10,6 +13,8 @@ import {BookService} from '../../services'
 export class EditBook {
 
   pageTitle: string = ''
+
+  action: string = ''
 
   edit: boolean = false
 
@@ -38,18 +43,26 @@ export class EditBook {
   setTitle (route) {
     if (route === '/add') {
         this.pageTitle = 'Add a new book to the catalog'
+        this.action = 'Submit'
     } else {
       this.pageTitle = 'Edit existing book'
+      this.action = 'Update'
       this.getBook(route)
       this.edit = true
     }
   }
 
   getDefaults () {
-    const authors = this.bookService.post('/authors', {authors: {}})
-    const publishers = this.bookService.post('/publisher', {publisher: {}})
-    const categories = this.bookService.post('/category', {category: {}})
+    const authors = this.bookService.get('/author/find', {authors: {}})
+    const publishers = this.bookService.get('/publisher/find', {publisher: {}})
+    const categories = this.bookService.get('/category/find', {category: {}})
 
+    Observable.forkJoin([authors, publishers, categories])
+      .subscribe(results => {
+        this.authors = results[0]
+        this.publishers = results[1]
+        this.categories = results[2]
+      })
   }
 
   getId (route) {
