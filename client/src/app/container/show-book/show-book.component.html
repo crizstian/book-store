@@ -1,46 +1,12 @@
-<div class="row">
-  <div class="large-3 columns form">
-    <form>
-
-      <div class="row">
-        <div class="columns">
-          <label>Title
-            <input type="text" placeholder="title">
-          </label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="columns">
-          <label>Author
-            <input type="text" placeholder="author">
-          </label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="columns">
-          <label>Price
-            <input type="text" placeholder="price">
-          </label>
-        </div>
-      </div>
-
-      <div class="row align-center radio">
-        <input type="radio" name="pokemon" value="Red" id="pokemonRed" required><label for="pokemonRed">Less Then</label>
-        <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Greater Then</label>
-      </div>
-
-      <div class="row align-center">
-        <a class="button" href="#"><i class="mdi mdi-magnify"></i> Search</a>
-      </div>
-
-    </form>
+<div class="row expanded show">
+  <div class="small-12 medium-3 columns">
+    <search-book></search-book>
   </div>
-  <div class="columns form">
+  <div class="small-12 medium-9 columns">
     <book
       *ngFor="let book of books"
       [book]="book"
+      (action)="makeAction($event)"
       >
     </book>
   </div>

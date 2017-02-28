@@ -10,6 +10,7 @@ export const routes: ModuleWithProviders = RouterModule.forRoot([
       { path: '', component: Home },
       { path: 'browse', component: ShowBook },
       { path: 'add', component: EditBook },
+      { path: 'edit', component: EditBook },
     ]
   },
   { path: '**', redirectTo: '' }

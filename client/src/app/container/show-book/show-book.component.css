@@ -1,15 +1,9 @@
-.form label {
-  font-size: 1.6em
+.show {
+  padding: 0em 2em;
 }
 
-.form .radio label {
-  font-size: 1.2em
-}
-
-.form .row {
-  border: none;
-}
-
-.form:nth-child(1) {
-  border-right: 2px solid #ccc
+@media screen and (max-width: 39.9375em) {
+  .show {
+    padding: 0em .5em;
+  }
 }

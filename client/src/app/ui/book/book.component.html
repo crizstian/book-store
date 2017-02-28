@@ -1,28 +1,33 @@
-<div class="media-object">
+<div class="media-object stack-for-small">
   <div class="media-object-section">
-    <img src="../../../assets/book.png" style="width: 130px; height: 160px">
+    <img src="../../../assets/book.png" style="width: 150px; height: 160px">
   </div>
   <div class="media-object-section">
-    <h4>{{book.title}}</h4>
+    <h3>{{book.title}}</h3>
+
+    <div class="float-right">
+      <a class="hollow button secondary tiny" href="#">{{book.category}}</a>
+    </div>
+
+    <br>
+
     <p>
+      <small>Description </small> <br>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
       in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <br><br>
+      <small>Author: <span>{{book.author.toString()}}</span></small>
     </p>
 
-    <h6>
-      Author: <span>{{book.author.toString()}}</span>
-    </h6>
-    <h6>
-      Category: <label class="badge">{{book.category}}</label>
-    </h6>
-    <h6>
-      Price: <span>{{book.price | currency: symbolDisplay: true}}</span>
-    </h6>
+    <span class="price">{{book.price | currency: symbolDisplay: true}}</span>
 
-    <div class="button-group small float-right">
-      <a class="button"><i class="mdi mdi-arrow-right-drop-circle"></i> Read more</a>
-      <a class="button"><i class="mdi mdi-border-color"></i> Edit</a>
-      <a class="button alert"><i class="mdi mdi-delete"></i> Delete</a>
+    <br>
+
+    <div class="button-group float-right">
+      <a class="button" (click)="viewBook(book._id)"><i class="mdi mdi-arrow-right-drop-circle"></i> Read more</a>
+      <a class="button" (click)="editBook(book._id)"><i class="mdi mdi-border-color"></i> Edit</a>
+      <a class="button alert" (click)="deleteBook(book._id)"><i class="mdi mdi-delete"></i> Delete</a>
     </div>
   </div>
+
 </div>

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {AppBar, BookComponent} from './ui'
+import {AppBar, BookComponent, SearchBookForm} from './ui'
 import {Main, ShowBook, EditBook, Home} from './container'
 import {routes, providers} from './'
 
@@ -16,7 +16,8 @@ import {routes, providers} from './'
     ShowBook,
     BookComponent,
     EditBook,
-    Home
+    Home,
+    SearchBookForm
   ],
   imports: [
     BrowserModule,

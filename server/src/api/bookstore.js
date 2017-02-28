@@ -13,10 +13,9 @@ module.exports = (app, repo) => {
     }
   })
 
-  app.get('/bookstore', async (req, res, next) => {
+  app.post('/bookstore/find', async (req, res, next) => {
     try {
-      const book = (req.body.book) ? req.body.book : {}
-      const result = await repo.findBook(book)
+      const result = await repo.findBook(req.body.book)
       res.status(200).json(result)
     } catch (e) {
       next(e)
@@ -34,9 +33,9 @@ module.exports = (app, repo) => {
     }
   })
 
-  app.delete('/bookstore', async (req, res, next) => {
+  app.delete('/bookstore/:id', async (req, res, next) => {
     try {
-      const result = await repo.deleteBook(req.body.book)
+      const result = await repo.deleteBook(req.params.id)
       res.status(200).json(result)
     } catch (e) {
       next(e)

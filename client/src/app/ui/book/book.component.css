@@ -1,5 +1,79 @@
 .media-object {
- margin: 1em;
- padding: 1.5em;
- border-bottom: 1px solid #eee
+    margin: 1em;
+    padding: 1.5em;
+    border-bottom: 1px solid #eee;
+    background: #ffffff;
+    border-radius: .5em;
+}
+
+.media-object:hover {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    -webkit-transition: box-shadow 0.2s;
+    -moz-transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s;
+}
+
+.media-object h3 {
+    font-family: "Roboto", sans-serif;
+    text-align: left;
+    font-weight: bold;
+    color: #31353D;
+    padding: 1.2em
+}
+
+.media-object p span {
+    color: #435779;
+    font-weight: 500;
+}
+
+.media-object p {
+    font-family: "Roboto", sans-serif;
+    text-align: justify;
+    color: rgba(2, 23, 37, 0.7);
+    font-size: 1.1em;
+    line-height: 1.6;
+    /*margin: .5em 1em;*/
+}
+
+.price {
+    font-family: "PT Sans", sans-serif;
+    color: #435779;
+    font-size: 1.45em;
+    font-weight: 700;
+}
+
+
+@media print, screen and (min-width: 40em) {
+  .media-object {
+      padding: 1.2em;
+  }
+
+  .media-object h3 {
+      font-size: 1.2em
+  }
+
+  .media-object p {
+      font-size: 0.950em;
+      margin: 1em 0;
+  }
+
+}
+
+@media screen and (max-width: 39.9375em) {
+    .media-object {
+        margin: 0 0 .9em 0;
+        padding: 1em;
+    }
+    .media-object h3 {
+        text-align: center;
+    }
+
+    .media-object p {
+        font-size: 0.950em;
+        margin: 1em 0;
+    }
+    .price {
+        font-size: 1.25em;
+        padding-bottom: 1em;
+    }
 }

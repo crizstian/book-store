@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core'
+import {Component, Input, Output, EventEmitter} from '@angular/core'
 
 @Component({
   selector: 'book',
@@ -7,4 +7,18 @@ import {Component, Input} from '@angular/core'
 })
 export class BookComponent {
   @Input() book
+  @Output() action = new EventEmitter()
+
+  viewBook(id: string) {
+    this.action.next({id, action: 'view'})
+  }
+
+  editBook(id: string) {
+    this.action.next({id, action: 'edit'})
+  }
+
+  deleteBook(id: string) {
+    this.action.next({id, action: 'delete'})
+  }
+
 }

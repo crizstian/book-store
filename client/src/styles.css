@@ -1,13 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
-}
 
-.row {
-  background: #f9f9f9;
-  font-size: 11px;
-  line-height: 2rem;
-  border: solid 1px #c6c6c6;
+.button {
+  background-color: #435779;
+  color: rgba(255, 255, 255, 0.9);
 }

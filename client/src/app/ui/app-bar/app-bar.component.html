@@ -1,23 +1,27 @@
 <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
-  <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+  <button class="menu-icon" type="button" data-toggle></button>
   <div class="title-bar-title">Menu</div>
+  <div class="title-bar-right">{{title}}</div>
 </div>
 
 <div class="top-bar" id="example-menu">
-  <div class="top-bar-left">
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text">{{title}}</li>
-      <li>
-        <a [routerLink]="['']">Home</a>
-      </li>
-      <li><a [routerLink]="['', 'browse']">Browse</a></li>
-      <li><a [routerLink]="['', 'add']">Add</a></li>
-    </ul>
+  <div class="title-bar-title show-for-medium">
+    <li class="menu-text">{{title}}</li>
   </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <li><input type="search" placeholder="Search"></li>
-      <li><button type="button" class="button">Search</button></li>
+  <div class="row">
+    <ul class="vertical medium-horizontal menu align-center">
+      <li>
+        <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home
+      </a>
+      </li>
+      <li>
+        <a [routerLink]="['', 'browse']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Browse
+    </a>
+      </li>
+      <li>
+        <a [routerLink]="['', 'add']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Add
+      </a></li>
     </ul>
   </div>
 </div>
