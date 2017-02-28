@@ -49,7 +49,7 @@ describe('Publisher API', () => {
   it('can call get route', (done) => {
     const publisher = {}
     request(app)
-      .get('/publisher')
+      .post('/publisher/find')
       .send({publisher})
       .expect((res) => {
         // res.body.should.containEql('author')

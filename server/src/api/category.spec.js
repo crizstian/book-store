@@ -49,7 +49,7 @@ describe('Category API', () => {
   it('can call get route', (done) => {
     const category = {}
     request(app)
-      .get('/category')
+      .post('/category/find')
       .send({category})
       .expect((res) => {
         // res.body.should.containEql('author')

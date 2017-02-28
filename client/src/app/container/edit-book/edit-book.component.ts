@@ -13,6 +13,12 @@ export class EditBook {
 
   edit: boolean = false
 
+  authors = []
+
+  publishers = []
+
+  categories = []
+
   book = {
     title: '',
     author: '',
@@ -26,6 +32,7 @@ export class EditBook {
   constructor(private router: Router, private bookService: BookService) {
     const route: string = this.router.url
     this.setTitle(route)
+    this.getDefaults()
   }
 
   setTitle (route) {
@@ -36,6 +43,13 @@ export class EditBook {
       this.getBook(route)
       this.edit = true
     }
+  }
+
+  getDefaults () {
+    const authors = this.bookService.post('/authors', {authors: {}})
+    const publishers = this.bookService.post('/publisher', {publisher: {}})
+    const categories = this.bookService.post('/category', {category: {}})
+
   }
 
   getId (route) {
