@@ -1,23 +1,96 @@
-<h2>{{title}}</h2>
+<div class="row align-center">
+  <h2>{{pageTitle}} <i class="mdi mdi-pen"></i> </h2>
+</div>
 
-<form data-abide novalidate>
-  <div data-abide-error class="alert callout" style="display: none;">
+<form  (ngSubmit)="sendBook(edit)" #bookForm="ngForm">
+  <div [hidden]="!bookForm.form.valid || !bookForm.form.pristine" class="alert callout">
     <p><i class="fi-alert"></i> There are some errors in your form.</p>
   </div>
-  
+
   <div class="row">
-    <div class="medium-6 columns">
-      <label>Title
-        <input type="text" placeholder="title" aria-describedby="exampleHelpText" required pattern="text">
-        <span class="form-error">
-          Yo, you had better fill this out, it's required.
-        </span>
+    <div class="small-12 medium-6 columns">
+      <label><i class="mdi mdi-layers"></i> Title
+        <input
+          placeholder="title"
+          name="title"
+          type="text"
+          required
+          [(ngModel)]="book.title"
+          #title="ngModel"
+          >
+
+        <div
+          class="error"
+          [hidden]="title.valid || title.pristine">
+          <p>
+            Title must be filled, it's required.
+          </p>
+        </div>
+
       </label>
-      <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
     </div>
-    <div class="medium-6 columns">
-      <label>Author
-        <select id="select" required>
+
+    <div class="small-12 medium-6 columns">
+      <label><i class="mdi mdi-account"></i> Author
+        <select
+          id="autor"
+          name="autor"
+          required
+          [(ngModel)]="book.author"
+          #author="ngModel"
+          >
+            <option value=""></option>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+      </label>
+      <div
+        class="error"
+        [hidden]="author.valid || author.pristine">
+        <p>
+          Author must be selected, it's required.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <label><i class="mdi mdi-layers"></i> Category
+        <select
+          id="category"
+          name="category"
+          required
+          [(ngModel)]="book.category"
+          #category="ngModel"
+          >
+          <option value=""></option>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+        <div
+          class="error"
+          [hidden]="category.valid || category.pristine">
+          <p>
+            Category must be selected, it's required.
+          </p>
+        </div>
+      </label>
+    </div>
+
+    <div class="small-12 medium-6 columns">
+      <label><i class="mdi mdi-account"></i> Publisher
+        <select
+          id="publisher"
+          name="publisher"
+          required
+          [(ngModel)]="book.publisher"
+          #publisher="ngModel"
+          >
           <option value=""></option>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
@@ -25,54 +98,105 @@
           <option value="audi">Audi</option>
         </select>
       </label>
-      <p class="help-text" id="exampleHelpTex">This input is ignored by Abide using `data-abide-ignore`</p>
+      <div
+        class="error"
+        [hidden]="publisher.valid || publisher.pristine">
+        <p>
+          Publisher must be selected, it's required.
+        </p>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="medium-6 columns">
-      <label>Publication
-        <input type="text" placeholder="title" aria-describedby="exampleHelpText" required pattern="text">
-        <span class="form-error">
-          Yo, you had better fill this out, it's required.
-        </span>
+    <div class="small-12 medium-6 columns">
+      <label><i class="mdi mdi-calendar"></i> Publication
+        <input
+          type="date"
+          placeholder="publication"
+          name="publication"
+          required
+          [(ngModel)]="book.publication"
+          #publication="ngModel"
+          >
+          <div
+            class="error"
+            [hidden]="publication.valid || publication.pristine">
+            <p>
+              Date must be set, it's required.
+            </p>
+          </div>
       </label>
-      <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
     </div>
-    <div class="medium-6 columns">
-      <label>ISBN
-        <input type="text" placeholder="title" aria-describedby="exampleHelpText" required pattern="text">
-        <span class="form-error">
-          Yo, you had better fill this out, it's required.
-        </span>
+
+    <div class="small-12 medium-6 columns">
+      <label><i class="mdi mdi-barcode"></i> ISBN
+        <input
+          type="text"
+          placeholder="123abc"
+          name="isbn"
+          required
+          [(ngModel)]="book.isbn"
+          #isbn="ngModel"
+          [disabled]="edit"
+          >
+          <div
+            class="error"
+            [hidden]="isbn.valid || isbn.pristine">
+            <p>
+              ISBN must be filled, it's required.
+            </p>
+          </div>
       </label>
-      <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="medium-6 columns">
-      <label>Price
-        <input type="text" placeholder="http://foundation.zurb.com" pattern="url">
+    <div class="small-12 medium-6 columns">
+      <label><i class="mdi mdi-currency-usd"></i> Price
+        <input
+          type="number"
+          placeholder="$100"
+          name="price"
+          required
+          [(ngModel)]="book.price"
+          #price="ngModel"
+          >
       </label>
+      <div
+        class="error"
+        [hidden]="price.valid || price.pristine">
+        <p>
+          Price must be filled, it's required.
+        </p>
+      </div>
     </div>
-    <div class="medium-6 columns">
-      <label>Image
-        <input type="text" placeholder="title" aria-describedby="exampleHelpText" required pattern="text">
-        <span class="form-error">
-          Yo, you had better fill this out, it's required.
-        </span>
+
+    <div class="small-12 medium-6 columns">
+      <label><i class="mdi mdi-image"></i> Image
+        <input type="file" name="image">
       </label>
-      <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
     </div>
   </div>
 
-  <div class="row">
-    <fieldset class="large-6 columns">
-      <button class="button" type="submit" value="Submit">Submit</button>
-    </fieldset>
-    <fieldset class="large-6 columns">
-      <button class="button" type="reset" value="Reset">Reset</button>
-    </fieldset>
+  <div class="row align-center">
+    <div class="column small-4">
+      <button
+        class="button"
+        type="submit"
+        [disabled]="!bookForm.form.valid"
+        >
+          Submit
+      </button>
+    </div>
+    <div class="column small-4">
+      <button
+        class="button"
+        (click)="reset()"
+        [disabled]="!bookForm.form.valid"
+      >
+        Reset</button>
+    </div>
   </div>
+
 </form>

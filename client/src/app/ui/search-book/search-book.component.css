@@ -6,14 +6,34 @@ form .radio label {
   font-size: 0.875em
 }
 
+form h3 {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  font-weight: bold;
+  color: #31353D;
+  margin-top: 1em;
+}
+
 form {
   padding-right: 1.5em;
   border-right: 2px solid #eee
 }
 
+@media print, screen and (min-width: 40em) {
+
+  form h3 {
+      font-size: 1.1em
+  }
+
+  form label {
+    font-size: 1.1em
+  }
+
+}
+
 @media screen and (max-width: 39.9375em) {
   form label {
-    font-size: 1.3em
+    font-size: 1.1em
   }
 
   form .radio label {

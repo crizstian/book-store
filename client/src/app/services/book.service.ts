@@ -38,6 +38,17 @@ export class BookService {
   }
 
   post(path: string, body): Observable<any> {
+    return this.http.post(
+      `${this.api_url}${path}`,
+      JSON.stringify(body),
+      { headers: this.headers }
+    )
+    .map(this.checkForError)
+    .catch(err => Observable.throw(err))
+    .map(this.getJson)
+  }
+
+  put(path: string, body): Observable<any> {
     return this.http.put(
       `${this.api_url}${path}`,
       JSON.stringify(body),
