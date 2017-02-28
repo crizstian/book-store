@@ -1,0 +1,28 @@
+form label {
+  font-size: 1.2em
+}
+
+form .radio label {
+  font-size: 0.875em
+}
+
+form {
+  padding-right: 1.5em;
+  border-right: 2px solid #eee
+}
+
+@media screen and (max-width: 39.9375em) {
+  form label {
+    font-size: 1.3em
+  }
+
+  form .radio label {
+    font-size: 0.875em
+  }
+
+  form {
+    padding: 1em;
+    border-right: none;
+    border-bottom: 2px dashed #eee
+  }
+}
