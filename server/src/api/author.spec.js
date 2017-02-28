@@ -30,6 +30,8 @@ describe('Author API', () => {
       validate: asValue(models.validate),
       serverSettings: asValue(serverSettings),
       repo: asValue({}),
+      categoryRepo: asValue({}),
+      publisherRepo: asValue({}),
       authorRepo: asValue(testRepo)
     })
 

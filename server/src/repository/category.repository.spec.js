@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 const should = require('should')
-const repository = require('./author.repository')
+const repository = require('./category.repository')
 const di = require('../config')
 const EventEmitter = require('events')
 const mediator = new EventEmitter()
 let test
 
-describe('Author Repository', () => {
+describe('Category Repository', () => {
   // example of using the promise based specification
   before('connects the repository with the db', (done) => {
     mediator.on('di.ready', (container) => {
@@ -25,7 +25,7 @@ describe('Author Repository', () => {
             done()
           })
       }
-      container.cradle.database.collection('authors').remove({}, removesTestData)
+      container.cradle.database.collection('category').remove({}, removesTestData)
     })
 
     di.init(mediator)
@@ -38,38 +38,30 @@ describe('Author Repository', () => {
     done()
   })
 
-  it('can add authors to the database', async () => {
+  it('can add category to the database', async () => {
     try {
-      const author1 = {
-        name: 'Cristian Ramirez',
-        age: 24,
-        description: 'lorem ipsum'
+      const category1 = {
+        name: 'Database'
       }
 
-      const author2 = {
-        name: 'Juan Diego Gomez',
-        age: 38,
-        description: 'lorem ipsum'
+      const category2 = {
+        name: 'Programming'
       }
 
-      const author3 = {
-        name: 'Jurgen Klarick',
-        age: 42,
-        description: 'lorem ipsum'
+      const category3 = {
+        name: 'Finance'
       }
 
-      const author4 = {
-        name: 'Eric Elliot',
-        age: 40,
-        description: 'lorem ipsum'
+      const category4 = {
+        name: 'Selling'
       }
 
       // Example of using async/await ES8 specification
       const [result1, result2, result3, result4] = await Promise.all([
-        test.insertAuthor(author1),
-        test.insertAuthor(author2),
-        test.insertAuthor(author3),
-        test.insertAuthor(author4)
+        test.insertCategory(category1),
+        test.insertCategory(category2),
+        test.insertCategory(category3),
+        test.insertCategory(category4)
       ])
       should.equal(Object.keys(result1).includes('_id'), true)
       should.equal(Object.keys(result2).includes('_id'), true)
@@ -80,11 +72,11 @@ describe('Author Repository', () => {
     }
   })
 
-  it('can get authors from database', async () => {
+  it('can get category from database', async () => {
     try {
       // Example of using async/await ES8 specification with promise.all
-      const authors = await test.getAuthor({author: {}})
-      authors.should.be.instanceof(Array)
+      const category = await test.getCategory({category: {}})
+      category.should.be.instanceof(Array)
     } catch (e) {
       console.log(e)
     }

@@ -28,8 +28,8 @@ const start = (container) => {
       req.container = container.createScope()
       next()
     })
-    const {repo, authorRepo} = container.cradle
-    api(app, {repo, authorRepo})
+
+    api(app, container)
 
     if (process.env.NODE === 'test') {
       const server = app.listen(port, () => resolve(server))
