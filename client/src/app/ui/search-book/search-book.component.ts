@@ -42,7 +42,6 @@ export class SearchBookForm {
 
   searchBook (search) {
     this.searchObj.next(this.makeBookObj(search))
-    // /\b(?:ISBN(?:: ?| ))?((?:97[89])?\d{9}[\dx])\b/i
   }
 
 }

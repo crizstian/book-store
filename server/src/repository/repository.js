@@ -73,6 +73,7 @@ const repository = (container) => {
         }
         resolve(books)
       }
+      cursor.sort({publication: 1})
       cursor.forEach(addBook, sendBooks)
     })
   }
@@ -82,10 +83,14 @@ const repository = (container) => {
       const query = queryDocument({id: book.id})
       const update = updateDocument(book)
 
-      db.collection('books').updateOne(query, update, (err, result) => {
+      console.log(query);
+      console.log(update);
+
+      db.collection('books').update(query, update, (err, result) => {
         if (err) {
           reject(new Error(`An error occured when updating a book, err: ${err}`))
         }
+        console.log(result.result)
         resolve(result.result)
       })
     })

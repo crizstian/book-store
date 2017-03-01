@@ -27,6 +27,7 @@ const repository = (container) => {
         }
         resolve(authors)
       }
+      cursor.sort({name: 1})
       cursor.forEach(addAuthor, sendAuthors)
     })
   }

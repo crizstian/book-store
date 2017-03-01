@@ -2,188 +2,202 @@
   <h2>{{pageTitle}} <i class="mdi mdi-pen"></i> </h2>
 </div>
 
-<form  (ngSubmit)="sendBook(edit)" #bookForm="ngForm">
-  <div class="row">
-    <div class="small-12 medium-6 columns">
-      <label><i class="mdi mdi-layers"></i> Title
-        <input
-          placeholder="title"
-          name="title"
-          type="text"
-          required
-          [(ngModel)]="book.title"
-          #title="ngModel"
-          >
-
-        <div
-          class="error"
-          [hidden]="title.valid || title.pristine">
-          <p>
-            Title must be filled, it's required.
-          </p>
-        </div>
-
-      </label>
-    </div>
-
-    <div class="small-12 medium-6 columns">
-      <label><i class="mdi mdi-account"></i> Author
-        <select
-          id="autor"
-          name="autor"
-          required
-          [(ngModel)]="book.author"
-          #author="ngModel"
-          >
-          <option value="">Select an author</option>
-          <option *ngFor="let author of authors" [ngValue]="author.name">{{author.name}}</option>
-        </select>
-      </label>
-      <div
-        class="error"
-        [hidden]="author.valid || author.pristine">
-        <p>
-          Author must be selected, it's required.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="small-12 medium-6 columns">
-      <label><i class="mdi mdi-layers"></i> Category
-        <select
-          id="category"
-          name="category"
-          required
-          [(ngModel)]="book.category"
-          #category="ngModel"
-          >
-          <option value="">Select a category</option>
-          <option *ngFor="let category of categories" [ngValue]="category.name">{{category.name}}</option>
-        </select>
-        <div
-          class="error"
-          [hidden]="category.valid || category.pristine">
-          <p>
-            Category must be selected, it's required.
-          </p>
-        </div>
-      </label>
-    </div>
-
-    <div class="small-12 medium-6 columns">
-      <label><i class="mdi mdi-account"></i> Publisher
-        <select
-          id="publisher"
-          name="publisher"
-          required
-          [(ngModel)]="book.publisher"
-          #publisher="ngModel"
-          >
-          <option value="">Select a publisher</option>
-          <option *ngFor="let publisher of publishers" [ngValue]="publisher.name">{{publisher.name}}</option>
-        </select>
-      </label>
-      <div
-        class="error"
-        [hidden]="publisher.valid || publisher.pristine">
-        <p>
-          Publisher must be selected, it's required.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="small-12 medium-6 columns">
-      <label><i class="mdi mdi-calendar"></i> Publication
-        <input
-          type="date"
-          placeholder="publication"
-          name="publication"
-          required
-          [(ngModel)]="book.publication"
-          #publication="ngModel"
-          >
+<form  (ngSubmit)="sendBook(bookForm.value, edit)" #bookForm="ngForm">
+  <fieldset ngModelGroup="book">
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <label><i class="mdi mdi-layers"></i> Title
+          <input
+            placeholder="title"
+            name="title"
+            type="text"
+            pattern="[a-zA-Z0-9 ]+"
+            required
+            ngModel
+            #titleRef="ngModel"
+            >
           <div
             class="error"
-            [hidden]="publication.valid || publication.pristine">
+            [hidden]="titleRef.valid || titleRef.pristine">
             <p>
-              Date must be set, it's required.
+              Title must be filled, it's required.
             </p>
           </div>
-      </label>
-    </div>
 
-    <div class="small-12 medium-6 columns">
-      <label><i class="mdi mdi-barcode"></i> ISBN
-        <input
-          type="text"
-          placeholder="123abc"
-          name="isbn"
-          required
-          [(ngModel)]="book.isbn"
-          #isbn="ngModel"
-          [disabled]="edit"
-          >
-          <div
-            class="error"
-            [hidden]="isbn.valid || isbn.pristine">
-            <p>
-              ISBN must be filled, it's required.
-            </p>
-          </div>
-      </label>
-    </div>
-  </div>
+        </label>
+      </div>
 
-  <div class="row">
-    <div class="small-12 medium-6 columns">
-      <label><i class="mdi mdi-currency-usd"></i> Price
-        <input
-          type="number"
-          placeholder="$100"
-          name="price"
-          required
-          [(ngModel)]="book.price"
-          #price="ngModel"
-          >
-      </label>
-      <div
-        class="error"
-        [hidden]="price.valid || price.pristine">
-        <p>
-          Price must be filled, it's required.
-        </p>
+      <div class="small-12 medium-6 columns">
+        <label><i class="mdi mdi-account"></i> Author
+          <select
+            id="author"
+            name="author"
+            required
+            ngModel
+            #authorRef="ngModel"
+            >
+            <option value="">Select an author</option>
+            <option *ngFor="let author of authors" [ngValue]="author.name">{{author.name}}</option>
+          </select>
+        </label>
+        <div
+          class="error"
+          [hidden]="authorRef.valid || authorRef.pristine">
+          <p>
+            Author must be selected, it's required.
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="small-12 medium-6 columns">
-      <label><i class="mdi mdi-image"></i> Image
-        <input type="file" name="image">
-      </label>
-    </div>
-  </div>
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <label><i class="mdi mdi-layers"></i> Category
+          <select
+            id="category"
+            name="category"
+            required
+            ngModel
+            #categoryRef="ngModel"
+            >
+            <option value="">Select a category</option>
+            <option *ngFor="let category of categories" [ngValue]="category.name">{{category.name}}</option>
+          </select>
+          <div
+            class="error"
+            [hidden]="categoryRef.valid || categoryRef.pristine">
+            <p>
+              Category must be selected, it's required.
+            </p>
+          </div>
+        </label>
+      </div>
 
-  <div class="row align-center">
-    <div class="column small-4">
-      <button
-        class="button"
-        type="submit"
-        [disabled]="!bookForm.form.valid"
+      <div class="small-12 medium-6 columns">
+        <label><i class="mdi mdi-account"></i> Publisher
+          <select
+            id="publisher"
+            name="publisher"
+            required
+            ngModel
+            #publisherRef="ngModel"
+            >
+            <option value="">Select a publisher</option>
+            <option *ngFor="let publisher of publishers" [ngValue]="publisher.name">{{publisher.name}}</option>
+          </select>
+        </label>
+        <div
+          class="error"
+          [hidden]="publisherRef.valid || publisherRef.pristine">
+          <p>
+            Publisher must be selected, it's required.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <label><i class="mdi mdi-calendar"></i> Publication
+          <input
+            type="date"
+            placeholder="publication"
+            name="publication"
+            required
+            ngModel
+            #publicationRef="ngModel"
+            (input)="verifyDate($event.target.value)"
+            >
+            <div
+              class="error"
+              [hidden]="publicationRef.valid || publicationRef.pristine">
+              <p>
+                Date is larger or not been set, it's required.
+              </p>
+            </div>
+        </label>
+      </div>
+
+      <div class="small-12 medium-6 columns">
+        <label><i class="mdi mdi-barcode"></i> ISBN
+          <input
+            type="text"
+            placeholder="123abc"
+            name="isbn"
+            pattern="((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])"
+            required
+            ngModel
+            #isbnRef="ngModel"
+            [disabled]="edit"
+            >
+
+            <div
+              class="error"
+              [hidden]="isbnRef.valid || isbnRef.pristine">
+              <p>
+                ISBN must be filled, it's required.
+              </p>
+            </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <label><i class="mdi mdi-currency-usd"></i> Price
+          <input
+            type="number"
+            placeholder="$100"
+            name="price"
+            pattern="^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$"
+            required
+            ngModel
+            #priceRef="ngModel"
+            >
+        </label>
+        <div
+          class="error"
+          [hidden]="priceRef.valid || priceRef.pristine">
+          <p>
+            Price must be filled, it's required.
+          </p>
+        </div>
+      </div>
+
+      <div class="small-12 medium-6 columns">
+        <label><i class="mdi mdi-image"></i> Image
+          <input type="file" name="image">
+        </label>
+      </div>
+    </div>
+
+    <div class="row align-center">
+      <div class="column small-4">
+        <button
+          class="button"
+          type="submit"
+          [disabled]="!bookForm.form.valid"
+          >
+            {{action}}
+        </button>
+      </div>
+      <div class="column small-4">
+        <button
+          class="button"
+          (click)="reset()"
+          [disabled]="!bookForm.form.valid"
         >
-          {{action}}
-      </button>
-    </div>
-    <div class="column small-4">
-      <button
-        class="button"
-        (click)="reset()"
-        [disabled]="!bookForm.form.valid"
-      >
-        Reset</button>
-    </div>
-  </div>
+          Reset</button>
+      </div>
 
+      <div [hidden]="!edit" class="column small-4">
+        <button
+          class="button"
+          [routerLink]="['', 'browse']"
+        >
+          Cancel</button>
+      </div>
+
+    </div>
+  </fieldset>
 </form>

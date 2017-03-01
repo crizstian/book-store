@@ -1,10 +1,12 @@
-import {Component} from '@angular/core'
+import {Component, ViewChild} from '@angular/core'
 import {Router} from '@angular/router'
 import {BookService, AuthorService, CategoryService, PublisherService} from '../../services'
 import {Store} from '../../store'
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/observable/forkJoin'
+import 'rxjs/add/observable/combineLatest'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/filter'
 
 @Component({
   selector: 'edit-book',
@@ -12,28 +14,21 @@ import 'rxjs/add/operator/map';
   templateUrl: './edit-book.component.html'
 })
 export class EditBook {
+  @ViewChild('bookForm') book
+  @ViewChild('publicationRef') publication
 
   pageTitle: string = ''
 
   action: string = ''
 
   edit: boolean = false
+  dateValidation: boolean = false
 
   authors = []
 
   publishers = []
 
   categories = []
-
-  book = {
-    title: '',
-    author: '',
-    category: '',
-    publication: '',
-    isbn: '',
-    publisher: '',
-    price: ''
-  }
 
   constructor(
     private router: Router,
@@ -88,7 +83,9 @@ export class EditBook {
     this.bookService.getBook({book})
       .subscribe((data) => {
         const publication = this.formatDate(data[0].publication)
-        Object.assign(this.book, data[0], {publication, author: data[0].author.toString()})
+        const b = Object.assign({}, data[0], {publication, author: data[0].author.toString()})
+        delete b._id
+        this.book.setValue({book: b})
       })
   }
 
@@ -108,25 +105,25 @@ export class EditBook {
      return [year, month, day].join('-');
  }
 
-  sendBook (edit) {
+ verifyDate (date) {
+   const currentDate = new Date()
+   const selectedDate = new Date(date)
+
+   if (currentDate < selectedDate) {
+    const book = Object.assign({}, this.book.value)
+    Object.assign(book.book, {publication: ''})
+    this.book.setValue(book)
+   }
+
+ }
+
+  sendBook (bookForm, edit) {
     if (!edit) {
-      this.bookService.addBook({book: this.book})
+      this.bookService.addBook(bookForm)
         .subscribe(data => this.router.navigate(['','browse']))
     } else {
-      this.bookService.updateBook({book: this.book})
+      this.bookService.updateBook(bookForm)
         .subscribe(data => this.router.navigate(['','browse']))
-    }
-  }
-
-  reset () {
-    this.book = {
-      title: '',
-      author: '',
-      category: '',
-      publication: '',
-      isbn: '',
-      publisher: '',
-      price: ''
     }
   }
 

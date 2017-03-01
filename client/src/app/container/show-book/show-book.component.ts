@@ -38,7 +38,9 @@ export class ShowBook {
   getBooks () {
     // we get the list of books from the server
     this.bookService.getBook({book: {}})
-      .subscribe((data) => this.books = data)
+      .subscribe((data) => {
+        this.books = data
+      })
   }
 
   searchBook(book) {
