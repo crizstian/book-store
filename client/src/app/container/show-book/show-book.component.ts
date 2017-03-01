@@ -35,5 +35,11 @@ export class ShowBook {
     }
   }
 
+  searchBook(book: any) {
+    this.bookService.get('/bookstore/find', book)
+      .subscribe((data) => {
+        this.books = data
+      })
+  }
 
 }

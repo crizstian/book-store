@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core'
+import {Component, Output, EventEmitter} from '@angular/core'
 
 @Component({
   selector: 'search-book',
@@ -6,19 +6,46 @@ import {Component, Input, Output, EventEmitter} from '@angular/core'
   templateUrl: './search-book.component.html'
 })
 export class SearchBookForm {
-  @Input() book
-  @Output() action = new EventEmitter()
+  @Output() searchObj = new EventEmitter()
 
-  viewBook(id: string) {
-    this.action.next({id, action: 'view'})
+  search = {
+    title: '',
+    author: '',
+    price: ''
   }
 
-  editBook(id: string) {
-    this.action.next({id, action: 'edit'})
+  range = {}
+
+  setPriceObj (): any {
+    if (typeof this.search.price === 'number') {
+        const number = this.search.price
+        if (this.range['filter'] === 'lower') {
+          return {price: {number, lower: true}}
+        } else if (this.range['filter'] === 'higher'){
+          return {price: {number, higher: true}}
+        } else {
+          return {price: number}
+        }
+    }
   }
 
-  deleteBook(id: string) {
-    this.action.next({id, action: 'delete'})
+  makeBookObj (): any {
+    const price = this.setPriceObj()
+    const book = {}
+
+    for (let key in this.search) {
+        if (this.search[key] !== '') {
+            book[key] = this.search[key]
+        }
+    }
+
+    return Object.assign(book, price)
+
+  }
+
+  searchBook () {
+    const book = this.makeBookObj()
+    this.searchObj.next({book})
   }
 
 }

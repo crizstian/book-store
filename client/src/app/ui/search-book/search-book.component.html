@@ -1,9 +1,14 @@
-<form>
+<form (ngSubmit)="searchBook()" #searchForm="ngForm">
   <h3><i class="mdi mdi-book-open-page-variant"></i> Search Book</h3>
   <div class="row">
     <div class="columns">
       <label><i class="mdi mdi-buffer"></i> Title
-        <input type="text" placeholder="title">
+        <input
+          placeholder="title"
+          name="title"
+          type="text"
+          [(ngModel)]="search.title"
+          >
       </label>
     </div>
   </div>
@@ -11,7 +16,12 @@
   <div class="row">
     <div class="columns">
       <label><i class="mdi mdi-account"></i> Author
-        <input type="text" placeholder="author">
+        <input
+          placeholder="author"
+          name="author"
+          type="text"
+          [(ngModel)]="search.author"
+          >
       </label>
     </div>
   </div>
@@ -19,18 +29,23 @@
   <div class="row">
     <div class="columns">
       <label><i class="mdi mdi-currency-usd"></i> Price
-        <input type="text" placeholder="price">
+        <input
+          placeholder="price"
+          name="price"
+          type="number"
+          [(ngModel)]="search.price"
+          >
       </label>
     </div>
   </div>
 
   <div class="row align-center radio">
-    <input type="radio" name="pokemon" value="Red" id="pokemonRed" required><label for="pokemonRed">Less Then</label>
-    <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Greater Then</label>
+    <input type="radio" name="filter" value="lower" id="lower" [(ngModel)]="range.filter"><label for="lower">Lower than</label>
+      <input type="radio" name="filter" value="higher" id="higher" [(ngModel)]="range.filter"><label for="higher">Higher than</label>
   </div>
 
   <div class="row align-center">
-    <a class="button" href="#"><i class="mdi mdi-magnify"></i> Search</a>
+    <button class="button" type="submit"><i class="mdi mdi-magnify"></i> Search</button>
   </div>
 
 </form>

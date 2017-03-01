@@ -19,6 +19,16 @@ form {
   border-right: 2px solid #eee
 }
 
+.ng-invalid.ng-dirty {
+  border-right: 3px solid red;
+}
+
+.error p {
+  color: red;
+  position: relative;
+  font-size: 0.675em;
+}
+
 @media print, screen and (min-width: 40em) {
 
   form h3 {
