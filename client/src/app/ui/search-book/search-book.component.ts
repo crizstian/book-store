@@ -1,4 +1,5 @@
-import {Component, Output, EventEmitter} from '@angular/core'
+import {Component, Input, Output, EventEmitter} from '@angular/core'
+import {AuthorService} from '../../services'
 
 @Component({
   selector: 'search-book',
@@ -6,10 +7,18 @@ import {Component, Output, EventEmitter} from '@angular/core'
   templateUrl: './search-book.component.html'
 })
 export class SearchBookForm {
+  @Input() headTitle
   @Output() searchObj = new EventEmitter()
   @Output() searchTitle = new EventEmitter()
   @Output() searchAuthor = new EventEmitter()
   @Output() searchPrice = new EventEmitter()
+
+  authors = []
+
+  constructor(private authorService: AuthorService) {
+    this.authorService.getAuthor({authors: {}})
+      .subscribe(data => this.authors = data)
+  }
 
   setPriceObj (search): any {
     if ('price' in search) {
@@ -30,7 +39,11 @@ export class SearchBookForm {
 
     for (let key in filters) {
         if (filters[key] !== '') {
-            book[key] = filters[key]
+            if (key == 'author') {
+              book[key] = [filters[key]]
+            } else {
+              book[key] = filters[key]
+            }
         }
     }
 

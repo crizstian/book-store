@@ -48,11 +48,6 @@ export class ShowBook {
   }
 
   searchBook(book) {
-
-    if (Object.keys(book).length === 0) {
-      this.getBooks()
-    }
-
     this.filters = book
   }
 

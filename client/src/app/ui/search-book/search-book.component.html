@@ -1,5 +1,5 @@
 <h3>
-  <i class="mdi mdi-book-open-page-variant"></i> Search Book
+  <i class="mdi mdi-book-open-page-variant"></i> {{headTitle}}
 </h3>
 
 <form (ngSubmit)="searchBook(searchForm.value)" #searchForm="ngForm">
@@ -31,15 +31,16 @@
     <div class="row">
       <div class="columns">
         <label><i class="mdi mdi-account"></i> Author
-          <input
-            placeholder="author"
+          <select
+            id="author"
             name="author"
-            type="text"
-            pattern="[a-zA-Z]+"
+            required
             ngModel
             #authorRef="ngModel"
-            (input)="searchByAuthor($event.target.value)"
             >
+            <option value="">Select an author</option>
+            <option *ngFor="let author of authors" [ngValue]="author.name">{{author.name}}</option>
+          </select>
         </label>
         <div
           class="error"

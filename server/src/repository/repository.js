@@ -18,11 +18,11 @@ const repository = (container) => {
     if ('price' in options) {
       if ('lower' in options.price) {
         query['price'] = {
-          $lte: options.price.number
+          $lte: parseFloat(options.price.number, 10)
         }
       } else if ('higher' in options.price) {
         query['price'] = {
-          $gte: options.price.number
+          $gte: parseFloat(options.price.number, 10)
         }
       } else {
         query['price'] = options.price.number

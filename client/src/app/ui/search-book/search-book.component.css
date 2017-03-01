@@ -6,12 +6,13 @@ form .radio label {
   font-size: 0.875em
 }
 
-form h3 {
+h3 {
   font-family: "Roboto", sans-serif;
   text-align: center;
   font-weight: bold;
   color: #31353D;
   margin-top: 1em;
+  padding: 1em;
 }
 
 form {

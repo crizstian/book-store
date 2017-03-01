@@ -1,6 +1,7 @@
 <div class="row expanded show">
   <div class="small-12 medium-3 columns">
     <search-book
+      [headTitle]="'Search book'"
       (searchObj)="searchBook($event)"
       (searchTitle)="searchBook($event)"
       (searchAuthor)="searchBook($event)"
