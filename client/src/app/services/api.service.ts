@@ -60,6 +60,7 @@ export class ApiService {
   }
 
   delete(path): Observable<any> {
+    console.log(path)
     return this.http.delete(
       `${this.api_url}${path}`,
       { headers: this.headers }

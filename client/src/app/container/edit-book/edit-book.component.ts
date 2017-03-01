@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core'
-import {Router} from '@angular/router'
+import {Router, ActivatedRoute} from '@angular/router'
 import {BookService, AuthorService, CategoryService, PublisherService} from '../../services'
 import {Store} from '../../store'
 import { Observable } from 'rxjs/Observable'
@@ -15,7 +15,6 @@ import 'rxjs/add/operator/filter'
 })
 export class EditBook {
   @ViewChild('bookForm') book
-  @ViewChild('publicationRef') publication
 
   pageTitle: string = ''
 
@@ -32,14 +31,15 @@ export class EditBook {
 
   constructor(
     private router: Router,
+    private route:ActivatedRoute,
     private store: Store,
     private bookService: BookService,
     private authorService: AuthorService,
     private categoryService: CategoryService,
     private publisherService: PublisherService
   ) {
-    const route: string = this.router.url
-    this.setTitle(route)
+    const {url} = this.router
+    this.setTitle(url)
     this.getDefaults()
   }
 
@@ -70,13 +70,9 @@ export class EditBook {
       })
   }
 
-  getId (route) {
-    return route.substr(route.indexOf('=') + 1)
-  }
-
   getBook (route) {
     const book = {
-      id: this.getId(route)
+      id: this.route.snapshot.params['id']
     }
 
     // we get the book by the id
@@ -122,7 +118,8 @@ export class EditBook {
       this.bookService.addBook(bookForm)
         .subscribe(data => this.router.navigate(['','browse']))
     } else {
-      this.bookService.updateBook(bookForm)
+      const book = Object.assign({}, bookForm.book, {id: this.route.snapshot.params['id']})
+      this.bookService.updateBook({book})
         .subscribe(data => this.router.navigate(['','browse']))
     }
   }

@@ -11,8 +11,10 @@ export class FilterBookPipe implements PipeTransform {
 
       return books.filter(book => {
         for (let p in parameters) {
-            if (book[p] === parameters[p]) {
+            if (new RegExp(`^${parameters[p]}.*`, 'i').exec(book[p])) {
                 return true
+            } else if (parameters[p] === '') {
+              return true
             }
         }
       })

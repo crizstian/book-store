@@ -7,6 +7,9 @@ import {Component, Output, EventEmitter} from '@angular/core'
 })
 export class SearchBookForm {
   @Output() searchObj = new EventEmitter()
+  @Output() searchTitle = new EventEmitter()
+  @Output() searchAuthor = new EventEmitter()
+  @Output() searchPrice = new EventEmitter()
 
   setPriceObj (search): any {
     if ('price' in search) {
@@ -43,5 +46,19 @@ export class SearchBookForm {
   searchBook (search) {
     this.searchObj.next(this.makeBookObj(search))
   }
+
+  searchByTitle (title) {
+    this.searchTitle.next({title})
+  }
+
+  searchByAuthor (author) {
+    this.searchAuthor.next({author})
+  }
+
+  searchByPrice (price) {
+    this.searchPrice.next({price})
+  }
+
+
 
 }

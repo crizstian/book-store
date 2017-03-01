@@ -24,13 +24,17 @@ export class ShowBook {
   makeAction({id='', action=''} = {}) {
     switch(action) {
       case 'view':
-        this.router.navigate(['','view', {id}])
+        this.router.navigate(['','view', id])
       break
       case 'edit':
-        this.router.navigate(['','edit', {id}])
+        this.router.navigate(['','edit', id])
       break
       case 'delete':
         this.bookService.deleteBook(id)
+          .subscribe(data => {
+            this.books = this.books.filter(({_id}) => _id !== id)
+            console.log(this.books)
+          })
       break
     }
   }

@@ -73,7 +73,7 @@ const repository = (container) => {
         }
         resolve(books)
       }
-      cursor.sort({publication: 1})
+      cursor.sort({publication: -1})
       cursor.forEach(addBook, sendBooks)
     })
   }

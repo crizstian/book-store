@@ -35,6 +35,7 @@ module.exports = (app, repo) => {
 
   app.delete('/bookstore/:id', async (req, res, next) => {
     try {
+      console.log(req.params.id);
       const result = await repo.deleteBook({id: req.params.id})
       res.status(200).json(result)
     } catch (e) {

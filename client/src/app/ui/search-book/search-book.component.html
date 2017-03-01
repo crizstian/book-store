@@ -14,6 +14,7 @@
             pattern="[a-zA-Z0-9 ]+"
             ngModel
             #titleRef="ngModel"
+            (input)="searchByTitle($event.target.value)"
             >
         </label>
 
@@ -37,6 +38,7 @@
             pattern="[a-zA-Z]+"
             ngModel
             #authorRef="ngModel"
+            (input)="searchByAuthor($event.target.value)"
             >
         </label>
         <div
@@ -59,6 +61,7 @@
             pattern="^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$"
             ngModel
             #priceRef="ngModel"
+            (input)="searchByPrice($event.target.value)"
             >
         </label>
         <div
