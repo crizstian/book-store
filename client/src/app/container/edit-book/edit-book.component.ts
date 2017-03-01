@@ -1,6 +1,7 @@
 import {Component} from '@angular/core'
 import {Router} from '@angular/router'
-import {BookService} from '../../services'
+import {BookService, AuthorService, CategoryService, PublisherService} from '../../services'
+import {Store} from '../../store'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/map';
@@ -34,7 +35,14 @@ export class EditBook {
     price: ''
   }
 
-  constructor(private router: Router, private bookService: BookService) {
+  constructor(
+    private router: Router,
+    private store: Store,
+    private bookService: BookService,
+    private authorService: AuthorService,
+    private categoryService: CategoryService,
+    private publisherService: PublisherService
+  ) {
     const route: string = this.router.url
     this.setTitle(route)
     this.getDefaults()
@@ -47,16 +55,18 @@ export class EditBook {
     } else {
       this.pageTitle = 'Edit existing book'
       this.action = 'Update'
-      this.getBook(route)
       this.edit = true
+      this.getBook(route)
     }
   }
 
   getDefaults () {
-    const authors = this.bookService.get('/author/find', {authors: {}})
-    const publishers = this.bookService.get('/publisher/find', {publisher: {}})
-    const categories = this.bookService.get('/category/find', {category: {}})
+    // we get the data needed from the server
+    const authors = this.authorService.getAuthor({authors: {}})
+    const publishers = this.publisherService.getPublisher({publisher: {}})
+    const categories = this.categoryService.getCategory({category: {}})
 
+    // we fork all the http calls and get the results e.g. promise.all
     Observable.forkJoin([authors, publishers, categories])
       .subscribe(results => {
         this.authors = results[0]
@@ -74,11 +84,11 @@ export class EditBook {
       id: this.getId(route)
     }
 
-    this.bookService.get('/bookstore/find', {book})
-      .subscribe(data => {
+    // we get the book by the id
+    this.bookService.getBook({book})
+      .subscribe((data) => {
         const publication = this.formatDate(data[0].publication)
         Object.assign(this.book, data[0], {publication, author: data[0].author.toString()})
-        console.log(this.book)
       })
   }
 
@@ -100,10 +110,10 @@ export class EditBook {
 
   sendBook (edit) {
     if (!edit) {
-      this.bookService.post('/bookstore', {book: this.book})
+      this.bookService.addBook({book: this.book})
         .subscribe(data => this.router.navigate(['','browse']))
     } else {
-      this.bookService.put('/bookstore', {book: this.book})
+      this.bookService.updateBook({book: this.book})
         .subscribe(data => this.router.navigate(['','browse']))
     }
   }

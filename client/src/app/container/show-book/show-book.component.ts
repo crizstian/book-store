@@ -1,5 +1,6 @@
 import {Component} from '@angular/core'
 import {Router} from '@angular/router'
+import { Store } from '../../store'
 import {BookService} from '../../services'
 
 @Component({
@@ -10,15 +11,14 @@ import {BookService} from '../../services'
 export class ShowBook {
 
   books:Array<any> = []
+  filters: any = {}
 
-  constructor(private bookService: BookService, private router: Router) {
-    this.bookService.get('/bookstore/find', {book: {}})
-      .subscribe((data) => this.books = data)
-  }
-
-  findBook (id) {
-     const index: number = this.books.findIndex((book) => book._id === id)
-    return this.books[index]
+  constructor(
+    private store: Store,
+    private bookService: BookService,
+    private router: Router
+  ) {
+    this.getBooks()
   }
 
   makeAction({id='', action=''} = {}) {
@@ -30,16 +30,24 @@ export class ShowBook {
         this.router.navigate(['','edit', {id}])
       break
       case 'delete':
-        this.bookService.delete(`/bookstore/${id}`)
+        this.bookService.deleteBook(id)
       break
     }
   }
 
-  searchBook(book: any) {
-    this.bookService.get('/bookstore/find', book)
-      .subscribe((data) => {
-        this.books = data
-      })
+  getBooks () {
+    // we get the list of books from the server
+    this.bookService.getBook({book: {}})
+      .subscribe((data) => this.books = data)
+  }
+
+  searchBook(book) {
+
+    if (Object.keys(book).length === 0) {
+      this.getBooks()
+    }
+
+    this.filters = book
   }
 
 }

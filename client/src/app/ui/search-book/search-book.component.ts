@@ -8,20 +8,12 @@ import {Component, Output, EventEmitter} from '@angular/core'
 export class SearchBookForm {
   @Output() searchObj = new EventEmitter()
 
-  search = {
-    title: '',
-    author: '',
-    price: ''
-  }
-
-  range = {}
-
-  setPriceObj (): any {
-    if (typeof this.search.price === 'number') {
-        const number = this.search.price
-        if (this.range['filter'] === 'lower') {
+  setPriceObj (search): any {
+    if ('price' in search) {
+        const number = search['price']
+        if (search['filter'] === 'lower') {
           return {price: {number, lower: true}}
-        } else if (this.range['filter'] === 'higher'){
+        } else if (search['filter'] === 'higher'){
           return {price: {number, higher: true}}
         } else {
           return {price: number}
@@ -29,23 +21,28 @@ export class SearchBookForm {
     }
   }
 
-  makeBookObj (): any {
-    const price = this.setPriceObj()
+  makeBookObj (values): any {
+    const {search: filters} = values
     const book = {}
 
-    for (let key in this.search) {
-        if (this.search[key] !== '') {
-            book[key] = this.search[key]
+    for (let key in filters) {
+        if (filters[key] !== '') {
+            book[key] = filters[key]
         }
     }
 
-    return Object.assign(book, price)
+    if (filters['price'] !== '') {
+        const price = this.setPriceObj(filters)
+        delete book['filter']
+        Object.assign(book, price)
+    }
 
+    return book
   }
 
-  searchBook () {
-    const book = this.makeBookObj()
-    this.searchObj.next({book})
+  searchBook (search) {
+    this.searchObj.next(this.makeBookObj(search))
+    // /\b(?:ISBN(?:: ?| ))?((?:97[89])?\d{9}[\dx])\b/i
   }
 
 }

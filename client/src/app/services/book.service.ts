@@ -1,75 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Book } from '../store';
+import { StoreHelper } from './store-helper.service';
+import { ApiService } from './api.service';
 import 'rxjs/Rx';
-import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class BookService {
-  headers: Headers = new Headers({
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
-  });
 
-  api_url: string = 'https://localhost:3000';
+  path: string = '/bookstore';
+  constructor(private storeHelper: StoreHelper, private apiService: ApiService) {}
 
-  constructor(private http: Http) {}
-
-  private getJson(response: Response) {
-    return response.json();
+  addBook (book) {
+    return this.apiService.post(this.path, book)
+    // .do(savedBook => this.storeHelper.add('books', savedBook))
   }
 
-  private checkForError(response: Response): Response | Observable<any> {
-    if (response.status >= 200 && response.status < 300) {
-      return response;
-    } else {
-      var error = new Error(response.statusText)
-      error['response'] = response;
-      console.error(error);
-      throw error;
-    }
+  updateBook (book) {
+    return this.apiService.put(this.path, book)
+    // .do(savedBook => this.storeHelper.add('books', savedBook))
   }
 
-  get(path: string, body): Observable<any> {
-    return this.http.post(`${this.api_url}${path}`,JSON.stringify(body), { headers: this.headers })
-    .map(this.checkForError)
-    .catch(err => Observable.throw(err))
-    .map(this.getJson)
+  getBook (book) {
+    return this.apiService.get(`${this.path}/find`, book)
+    // .do((res: any) => this.storeHelper.update('book', res.data));
   }
 
-  post(path: string, body): Observable<any> {
-    return this.http.post(
-      `${this.api_url}${path}`,
-      JSON.stringify(body),
-      { headers: this.headers }
-    )
-    .map(this.checkForError)
-    .catch(err => Observable.throw(err))
-    .map(this.getJson)
-  }
-
-  put(path: string, body): Observable<any> {
-    return this.http.put(
-      `${this.api_url}${path}`,
-      JSON.stringify(body),
-      { headers: this.headers }
-    )
-    .map(this.checkForError)
-    .catch(err => Observable.throw(err))
-    .map(this.getJson)
-  }
-
-  delete(path): Observable<any> {
-    return this.http.delete(
-      `${this.api_url}${path}`,
-      { headers: this.headers }
-    )
-    .map(this.checkForError)
-    .catch(err => Observable.throw(err))
-    .map(this.getJson)
-  }
-
-  setHeaders(headers) {
-    Object.keys(headers).forEach(header => this.headers.set(header, headers[header]));
+  deleteBook (id) {
+    return this.apiService.delete(`${this.path}/${id}`)
+    // .do((res: any) => this.storeHelper.findAndDelete('books', res.id));
   }
 }

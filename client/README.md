@@ -1,13 +1,32 @@
-# Src
+# Book Store
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.0.
 
+
+## Project Structure
+
+The Book Store example counts with 3 views:
+
+- Home
+
+- Browse catalog
+a) This section shows the books catalog
+
+b) every book shows the *title*, *author*, *price* and its *image*.
+
+c)  the user can filter the list of books by *title*, *author* and *price*
+
+The filters has its own validation, accepts text only in *title* and *author* fileds, and for *price* accepts only decimal numbers.
+
+- Add Book
+a) This section shows the books catalog
+
+b) every book shows the *title*, *author*, *price* and its *image*.
+
+c)  the user can filter the list of books by *title*, *author* and *price*
+
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
 ## Build
 

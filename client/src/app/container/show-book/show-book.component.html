@@ -4,7 +4,7 @@
   </div>
   <div class="small-12 medium-9 columns">
     <book
-      *ngFor="let book of books"
+      *ngFor="let book of books | filterBook: filters"
       [book]="book"
       (action)="makeAction($event)"
       >
