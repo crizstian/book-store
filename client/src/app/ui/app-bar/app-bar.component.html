@@ -11,18 +11,36 @@
   <div class="row">
     <ul class="vertical medium-horizontal menu align-center">
       <li>
-        <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <span class="show-for-small-only"><i class="mdi mdi-home"></i></span> Home
-      </a>
+        <a
+          [routerLink]="['']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+          (click)="onSelectedPage()">
+          <span class="show-for-small-only">
+            <i class="mdi mdi-home"></i>
+          </span> Home
+        </a>
       </li>
       <li>
-        <a [routerLink]="['', 'browse']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <span class="show-for-small-only"><i class="mdi mdi-sitemap"></i></span> Browse
-    </a>
+        <a
+          [routerLink]="['', 'browse']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+          (click)="onSelectedPage()">
+          <span class="show-for-small-only">
+            <i class="mdi mdi-sitemap"></i>
+          </span> Browse
+        </a>
       </li>
       <li>
-        <a [routerLink]="['', 'add']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <span class="show-for-small-only"><i class="mdi mdi-plus-circle"></i></span> Add
+        <a
+          [routerLink]="['', 'add']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+          (click)="onSelectedPage()">
+          <span class="show-for-small-only">
+            <i class="mdi mdi-plus-circle"></i>
+          </span> Add
       </a></li>
     </ul>
   </div>

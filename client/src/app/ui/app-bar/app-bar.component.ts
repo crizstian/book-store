@@ -1,5 +1,7 @@
 import {Component} from '@angular/core'
 
+declare var $:any
+
 @Component({
     selector: 'app-bar',
     styles : [`
@@ -60,5 +62,9 @@ import {Component} from '@angular/core'
 })
 export class AppBar {
   title:string = 'Book Store'
+
+  onSelectedPage () {
+    $('#example-menu').hide()
+  }
 
 }
