@@ -51,6 +51,19 @@
             <i class="mdi mdi-plus-circle"></i>
           </span> Add
       </a></li>
+      <li>
+        <a
+          [routerLink]="['', 'login']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+          >
+          <span
+            class="show-for-small-only"
+            (click)="onSelectedPage()"
+            >
+            <i class="mdi mdi-plus-circle"></i>
+          </span> Login
+      </a></li>
     </ul>
   </div>
 </div>

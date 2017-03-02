@@ -4,13 +4,13 @@ const moment = require('moment')
 const repository = (container) => {
   const {database: db, tokenSettings:{privateKey, jwt}} = container.cradle
 
-  const insertUser = (user) => {
+  const createUser = (user) => {
     return new Promise((resolve, reject) => {
       db.collection('users').insert(user, (err, result) => {
         if (err) {
           reject(new Error(`An error occured when inserting an author, err: ${err}`))
         }
-        resolve({token: createToken(result.ops[0])})
+        resolve(createToken(result.ops[0]))
       })
     })
   }
@@ -21,7 +21,7 @@ const repository = (container) => {
         if (err) {
           reject(new Error(`An error occured fetching a movie with id: ${id}, err: ${err}`))
         }
-        resolve({token: createToken(auth)})
+        resolve(createToken(auth))
       }
       db.collection('users').findOne(user, sendUserAuth)
     })
@@ -61,7 +61,7 @@ const repository = (container) => {
   }
 
   return Object.create({
-    insertUser,
+    createUser,
     authenticateUser,
     ensureAuthenticated,
     disconnect

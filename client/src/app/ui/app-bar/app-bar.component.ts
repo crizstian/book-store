@@ -1,4 +1,5 @@
-import {Component} from '@angular/core'
+import {Component, Input} from '@angular/core'
+import { AuthService } from '../../services/auth.service'
 
 declare var $:any
 
@@ -62,6 +63,13 @@ declare var $:any
 })
 export class AppBar {
   title:string = 'Book Store'
+  routes = []
+
+  constructor(private auth: AuthService) { }
+
+  signout () {
+    this.auth.signout()
+  }
 
   onSelectedPage () {
     $('#example-menu').hide()

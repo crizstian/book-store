@@ -13,7 +13,8 @@ import {
   Main,
   ShowBook,
   EditBook,
-  Home
+  Home,
+  Login
 } from './container'
 import {FilterBookPipe} from './pipes'
 import {
@@ -21,7 +22,8 @@ import {
   AuthorService,
   CategoryService,
   PublisherService,
-  ApiService
+  ApiService,
+  AuthService
 } from './services'
 import {routes} from './'
 
@@ -35,7 +37,8 @@ import {routes} from './'
     EditBook,
     Home,
     SearchBookForm,
-    FilterBookPipe
+    FilterBookPipe,
+    Login
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import {routes} from './'
     AuthorService,
     CategoryService,
     PublisherService,
-    ApiService
+    ApiService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

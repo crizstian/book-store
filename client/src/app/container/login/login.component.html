@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="medium-6 columns log-in-form">
+    <h4 class="text-center">{{mode}}</h4>
+
+    <form (ngSubmit)="authenticate()" #authForm="ngForm">
+      <div class="row">
+        <div class="columns">
+          <label>Email
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              required
+              [(ngModel)]="user.email"
+              #email="ngModel"
+            >
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="columns">
+          <label>Password
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              required
+              [(ngModel)]="user.password"
+              #password="ngModel"
+            >
+          </label>
+        </div>
+      </div>
+
+      <div class="row align-center">
+        <div class="column small-12 medium-6">
+          <button
+            [disabled]="!authForm.form.valid"
+            type="submit"
+            class="button"
+          >
+            {{ mode }}
+          </button>
+        </div>
+        <div class="column small-12 medium-6">
+          <a (click)="changeMode()" class="text-center link">
+            {{ linkText }}
+          </a>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

@@ -1,11 +1,13 @@
 import { RouterModule } from '@angular/router'
 import { ModuleWithProviders } from '@angular/core'
-import { Main, ShowBook, EditBook, Home } from './container'
+import { AuthService } from './services'
+import { Main, ShowBook, EditBook, Home, Login } from './container'
 
 export const routes: ModuleWithProviders = RouterModule.forRoot([
   {
     path: '',
     component: Main,
+    canActivate: [AuthService],
     children: [
       { path: '', component: Home },
       { path: 'browse', component: ShowBook },
@@ -13,5 +15,6 @@ export const routes: ModuleWithProviders = RouterModule.forRoot([
       { path: 'edit/:id', component: EditBook },
     ]
   },
+  { path: 'login', component: Login },
   { path: '**', redirectTo: '' }
 ])
