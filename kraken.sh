@@ -1,4 +1,5 @@
 function createDockerMachine {
+  docker-machine rm dimtec -y
   docker-machine create -d virtualbox dimtec
 }
 
@@ -38,8 +39,8 @@ function createClientServer {
 }
 
 function main {
-  eval `docker-machine env dimtec`
   createDockerMachine
+  eval `docker-machine env dimtec`
   createDatabase
   createBackendServer
   buildAngularApp

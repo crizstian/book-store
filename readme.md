@@ -33,3 +33,9 @@ To make use of the database the book service api calls the following ip server: 
 - MongoDB 3.4.2
 - Angular 2.4 with CLI
 - Docker For Mac 1.13.1
+
+### Snapshot
+
+![](./Snapshots.png)
+
+![](./Snapshots2.png)
