@@ -12,15 +12,9 @@ export class ApiService {
     Accept: 'application/json'
   });
 
-  api_url: string
+  api_url: string = 'https://192.168.99.100:3000'
 
   constructor(private http: Http) {
-    if (environment.production) {
-      this.api_url = 'https://192.168.99.100:3000'
-    } else {
-      this.api_url = 'https://localhost:3000'
-    }
-
     console.log(this.api_url)
   }
 
