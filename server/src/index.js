@@ -5,6 +5,7 @@ const repository = require('./repository/repository')
 const authorRepository = require('./repository/author.repository')
 const categoryRepository = require('./repository/category.repository')
 const publisherRepository = require('./repository/publisher.repository')
+const authRepository = require('./repository/auth.repository')
 const di = require('./config')
 const mediator = new EventEmitter()
 
@@ -20,17 +21,19 @@ process.on('uncaughtRejection', (err, promise) => {
 })
 
 mediator.on('di.ready', async (container) => {
-  const [repo, authorRepo, categoryRepo, publisherRepo] = await Promise.all([
+  const [repo, authorRepo, categoryRepo, publisherRepo, authRepo] = await Promise.all([
     repository.connect(container),
     authorRepository.connect(container),
     categoryRepository.connect(container),
-    publisherRepository.connect(container)
+    publisherRepository.connect(container),
+    authRepository.connect(container)
   ])
   console.log('Connected. Starting Server')
   container.registerValue({repo})
   container.registerValue({authorRepo})
   container.registerValue({categoryRepo})
   container.registerValue({publisherRepo})
+  container.registerValue({authRepo})
 
   const app = await server.start(container)
   console.log(`Server started succesfully, running on port: ${container.cradle.serverSettings.port}.`)

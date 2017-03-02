@@ -1,6 +1,6 @@
 const { createContainer, asValue } = require('awilix')
 
-function initDI ({serverSettings, dbSettings, database, models}, mediator) {
+function initDI ({serverSettings, dbSettings, tokenSettings, database, models}, mediator) {
   mediator.once('init', () => {
     mediator.on('db.ready', (db) => {
       const container = createContainer()
@@ -9,7 +9,8 @@ function initDI ({serverSettings, dbSettings, database, models}, mediator) {
         database: asValue(db),
         validate: asValue(models.validate),
         ObjectID: asValue(database.ObjectID),
-        serverSettings: asValue(serverSettings)
+        serverSettings: asValue(serverSettings),
+        tokenSettings: asValue(tokenSettings)
       })
 
       mediator.emit('di.ready', container)

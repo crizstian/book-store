@@ -8,9 +8,15 @@ const dbSettings = {
   }
 }
 
+const tokenSettings = {
+  jwt: require('jwt-simple'),
+  privateKey: '37LvDSm4XvjYOh9Y',
+  tokenExpiry: 1 * 30 * 3000 * 60
+}
+
 const serverSettings = {
   port: process.env.PORT || 3000,
   ssl: require('./ssl')
 }
 
-module.exports = Object.assign({}, { dbSettings, serverSettings })
+module.exports = Object.assign({}, { dbSettings, serverSettings, tokenSettings })

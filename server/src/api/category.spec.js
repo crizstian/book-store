@@ -32,7 +32,8 @@ describe('Category API', () => {
       repo: asValue({}),
       categoryRepo: asValue(testRepo),
       publisherRepo: asValue({}),
-      authorRepo: asValue({})
+      authorRepo: asValue({}),
+      authRepo: asValue({})
     })
 
     return server.start(container)

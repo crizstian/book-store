@@ -20,6 +20,7 @@ What is testing ?
 - schemas validation
 - repository functions (testing with the async/await specification)
 - api endpoints
+- basic authentication user process
 
 ### How to run it locally
 To run it locally we need to execute the following command:

@@ -39,7 +39,8 @@ describe('Book Store API', () => {
       repo: asValue(testRepo),
       categoryRepo: asValue({}),
       publisherRepo: asValue({}),
-      authorRepo: asValue({})
+      authorRepo: asValue({}),
+      authRepo: asValue({})
     })
 
     return server.start(container)
