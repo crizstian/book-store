@@ -3,6 +3,7 @@ import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
+import { environment } from '../../environments/environment'
 
 @Injectable()
 export class ApiService {
@@ -11,12 +12,20 @@ export class ApiService {
     Accept: 'application/json'
   });
 
-  api_url: string = 'https://localhost:3000';
+  api_url: string
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+    if (environment.production) {
+      this.api_url = 'https://192.168.99.100:3000'
+    } else {
+      this.api_url = 'https://localhost:3000'
+    }
+
+    console.log(this.api_url)
+  }
 
   private getJson(response: Response) {
-    return response.json();
+    return response.json()
   }
 
   private checkForError(response: Response): Response | Observable<any> {

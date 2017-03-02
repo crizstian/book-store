@@ -3,7 +3,7 @@
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 ### Stack
-- NodeJS 7.6.0
+- NodeJS 7.7.0
 - MongoDB 3.4.2
 
 ### How to run the test locally
@@ -19,5 +19,13 @@ What is testing ?
 - dependency injection
 - schemas validation
 - repository functions (testing with the async/await specification)
+- api endpoints
+
+### How to run it locally
+To run it locally we need to execute the following command:
+
+`$ npm start`
+
+and it will start the server at `https://localhost:3000`
 
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)

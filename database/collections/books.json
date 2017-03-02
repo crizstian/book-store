@@ -1,0 +1,3 @@
+{"_id":{"$oid":"58b72f3f961039151325396b"},"title":"My first book volume 1","author":["Cristian Ramirez"],"category":"Database","publisher":"O'rilley","publication":{"$date":"2017-02-28T00:00:00.000Z"},"isbn":"123abc123cvb1","price":500}
+{"_id":{"$oid":"58b72f61961039151325396c"},"title":"My first book volume 2","author":["Cristian Ramirez"],"category":"Programming","publisher":"Medium","publication":{"$date":"2017-03-01T00:00:00.000Z"},"isbn":"123abc123cvb2","price":200}
+{"_id":{"$oid":"58b72fa8961039151325396d"},"title":"Example finance","author":["Juan Diego Gomez"],"category":"Finance","publisher":"Alfa","publication":{"$date":"2017-02-27T00:00:00.000Z"},"isbn":"123abc123cvb0","price":200}

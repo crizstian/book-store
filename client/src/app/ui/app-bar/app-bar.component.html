@@ -15,8 +15,11 @@
           [routerLink]="['']"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}"
-          (click)="onSelectedPage()">
-          <span class="show-for-small-only">
+          >
+          <span
+            class="show-for-small-only"
+            (click)="onSelectedPage()"
+            >
             <i class="mdi mdi-home"></i>
           </span> Home
         </a>
@@ -26,8 +29,11 @@
           [routerLink]="['', 'browse']"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}"
-          (click)="onSelectedPage()">
-          <span class="show-for-small-only">
+          >
+          <span
+            class="show-for-small-only"
+            (click)="onSelectedPage()"
+            >
             <i class="mdi mdi-sitemap"></i>
           </span> Browse
         </a>
@@ -37,8 +43,11 @@
           [routerLink]="['', 'add']"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}"
-          (click)="onSelectedPage()">
-          <span class="show-for-small-only">
+          >
+          <span
+            class="show-for-small-only"
+            (click)="onSelectedPage()"
+            >
             <i class="mdi mdi-plus-circle"></i>
           </span> Add
       </a></li>
