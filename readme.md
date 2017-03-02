@@ -1,10 +1,18 @@
 # Book Store example with the MEAN Stack
 
-How to run the Book Store system
+### How to run the Book Store system
 
-execute the following command:
+### Stack
+- NodeJS 7.7.0 (installed for local testing only)
+- MongoDB 3.4.2
+- Angular 2.4 with CLI
+- Docker 1.13.1 [For Mac/For Windows/ Linux engine] (installed)
+
+### Run Command
 
 `$ bash < kraken.sh`
+
+### Description
 
 the kraken will setup everything automatically for us so it will to put our system up and running, the kraken file is composed by the following functions:
 
@@ -28,11 +36,6 @@ The web app will make use of the API calling the following url: `https://192.168
 - **MongoDB Database**
 To make use of the database the book service api calls the following ip server: `192.168.99.100:27017`, but to be able to perform the database operations we need to be authenticated.
 
-### Stack
-- NodeJS 7.7.0
-- MongoDB 3.4.2
-- Angular 2.4 with CLI
-- Docker For Mac 1.13.1
 
 ### Snapshot
 
