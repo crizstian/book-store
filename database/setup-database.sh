@@ -30,13 +30,19 @@ function createDBUserAdmin {
   docker exec -i $1 mongo admin -u cristian -p admin1 --eval "db.createUser({ user: 'cris', pwd: 'bookstorepass1', roles: [ { role: 'dbOwner', db: 'bookstore' } ] })"
 }
 
-function setupDefaultData {
-  docker exec -i $1 mongoimport --db $2 --collection books --file ./collection/books.json -u cris -p bookstorepass1 --authenticationDatabase=admin
-  docker exec -i $1 mongoimport --db $2 --collection authors --file ./collection/authors.json -u cris -p bookstorepass1 --authenticationDatabase=admin
-  docker exec -i $1 mongoimport --db $2 --collection category --file ./collection/category.json -u cris -p bookstorepass1 --authenticationDatabase=admin
-  docker exec -i $1 mongoimport --db $2 --collection publisher --file ./collection/publisher.json -u cris -p bookstorepass1 --authenticationDatabase=admin
+function copyDefaultData {
+  docker cp collections/books.json $1:/tmp
+  docker cp collections/authors.json $1:/tmp
+  docker cp collections/category.json $1:/tmp
+  docker cp collections/publisher.json $1:/tmp
 }
 
+function setupDefaultData {
+  docker exec -i $1 mongoimport --db $2 --collection books --file /tmp/books.json -u cris -p bookstorepass1 --authenticationDatabase=admin
+  docker exec -i $1 mongoimport --db $2 --collection authors --file /tmp/authors.json -u cris -p bookstorepass1 --authenticationDatabase=admin
+  docker exec -i $1 mongoimport --db $2 --collection category --file /tmp/category.json -u cris -p bookstorepass1 --authenticationDatabase=admin
+  docker exec -i $1 mongoimport --db $2 --collection publisher --file /tmp/publisher.json -u cris -p bookstorepass1 --authenticationDatabase=admin
+}
 
 function reset {
   # remove if the container exists
@@ -49,6 +55,7 @@ function main {
   createDockerVolume mongoStorage
   creataDatabaseServer mongoNode mongoStorage
   createDBUserAdmin mongoNode
+  copyDefaultData mongoNode
   setupDefaultData mongoNode bookstore
 }
 

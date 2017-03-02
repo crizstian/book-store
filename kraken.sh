@@ -5,6 +5,7 @@ function createDockerMachine {
 function createDatabase {
   cd database
   (bash < setup-database.sh)
+  cd ..
 }
 
 function createBackendServer {
@@ -38,6 +39,9 @@ function createClientServer {
 
 function main {
   eval `docker-machine env dimtec`
+  createDockerMachine
+  createDatabase
+  createBackendServer
   buildAngularApp
   createClientServer
 }
