@@ -1,6 +1,5 @@
 import {Component} from '@angular/core'
 import {Router} from '@angular/router'
-import { Store } from '../../store'
 import {BookService} from '../../services'
 
 @Component({
@@ -14,14 +13,13 @@ export class ShowBook {
   filters: any = {}
 
   constructor(
-    private store: Store,
     private bookService: BookService,
     private router: Router
   ) {
     this.getBooks()
   }
 
-  makeAction({id='', action=''} = {}) {
+  makeAction ({id='', action=''} = {}) {
     switch(action) {
       case 'view':
         this.router.navigate(['','view', id])

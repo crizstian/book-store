@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core'
 import {Router, ActivatedRoute} from '@angular/router'
 import {BookService, AuthorService, CategoryService, PublisherService} from '../../services'
-import {Store} from '../../store'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/forkJoin'
 import 'rxjs/add/observable/combineLatest'
@@ -17,22 +16,18 @@ export class EditBook {
   @ViewChild('bookForm') book
 
   pageTitle: string = ''
-
   action: string = ''
 
   edit: boolean = false
   dateValidation: boolean = false
 
   authors = []
-
   publishers = []
-
   categories = []
 
   constructor(
     private router: Router,
     private route:ActivatedRoute,
-    private store: Store,
     private bookService: BookService,
     private authorService: AuthorService,
     private categoryService: CategoryService,

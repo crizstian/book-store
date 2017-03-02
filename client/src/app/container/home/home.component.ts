@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {BookService} from '../../services'
 
-declare const $:any
 
 @Component({
   selector: 'main-container',
@@ -25,16 +24,12 @@ declare const $:any
     </div>
   `
 })
-export class Home implements OnInit{
+export class Home {
 
   results: boolean = false
   books = []
 
   constructor(private bookService: BookService) {}
-
-  ngOnInit() {
-    $(document).foundation();
-  }
 
   searchBook (book) {
     // we get the list of books from the server

@@ -4,10 +4,26 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {AppBar, BookComponent, SearchBookForm} from './ui'
-import {Main, ShowBook, EditBook, Home} from './container'
+import {
+  AppBar,
+  BookComponent,
+  SearchBookForm
+} from './ui'
+import {
+  Main,
+  ShowBook,
+  EditBook,
+  Home
+} from './container'
 import {FilterBookPipe} from './pipes'
-import {routes, providers} from './'
+import {
+  BookService,
+  AuthorService,
+  CategoryService,
+  PublisherService,
+  ApiService
+} from './services'
+import {routes} from './'
 
 @NgModule({
   declarations: [
@@ -27,7 +43,13 @@ import {routes, providers} from './'
     HttpModule,
     routes
   ],
-  providers,
+  providers: [
+    BookService,
+    AuthorService,
+    CategoryService,
+    PublisherService,
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

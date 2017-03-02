@@ -71,7 +71,4 @@ export class SearchBookForm {
   searchByPrice (price) {
     this.searchPrice.next({price})
   }
-
-
-
 }
