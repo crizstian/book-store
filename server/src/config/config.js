@@ -4,7 +4,7 @@ const dbSettings = {
   pass: process.env.DB_PASS || 'bookstorepass1',
   server: process.env.DB_SERVER || '192.168.99.100:27017',
   get url () {
-    return `mongodb://${this.user}:${this.pass}@${this.server}/admin?w=1,j=true`
+    return `mongodb://${this.server}/admin?w=1,j=true`
   }
 }
 

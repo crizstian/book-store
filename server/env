@@ -1,0 +1,5 @@
+DB=bookstore
+DB_USER=cris
+DB_PASS=bookstorepass1
+DB_SERVER=mongoNode
+PORT=3000
