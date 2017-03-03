@@ -17,12 +17,121 @@
 </head>
 
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
 
-    <!-- <div class="row">
-      <app-root>Loading...</app-root>
-    </div> -->
-    <!-- Compressed JavaScript -->
+    <style media="screen">
+    .loader-box{
+      width:200px;
+      height:200px;
+      margin:auto;
+      -moz-border-radius:5px;
+      -webkit-border-radius:5px;
+      border-radius:5px;
+      background-color:#ffffff;
+      margin-top:100px;
+      text-align:center;
+    }
+
+    .lable{
+      height:30px;
+      line-height:30px;
+      padding-top:20px;
+      font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color:#404040;
+      font-size:20px;
+    }
+
+    .loader{
+      width:90px;
+      height:90px;
+      background-color:#FFFFFF;
+      overflow:hidden;
+      display:block;
+      -moz-border-radius:100%;
+      -webkit-border-radius:100%;
+      border-radius:100%;
+      border:3px solid #5dba9d;
+      position:relative;
+      margin:15px auto;
+      z-index:1;
+    }
+
+    .element-animation{
+      animation:animationFrames linear 3s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards; /*when the spec is finished*/
+      -webkit-animation: animationFrames linear 3s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+      -moz-animation: animationFrames linear 3s;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-fill-mode:forwards; /*FF 5+*/
+      -o-animation: animationFrames linear 3s;
+      -o-animation-iteration-count: infinite;
+      -o-animation-fill-mode:forwards; /*Not implemented yet*/
+      -ms-animation: animationFrames linear 3s;
+      -ms-animation-iteration-count: infinite;
+      -ms-animation-fill-mode:forwards; /*IE 10+*/
+    }
+
+
+    @keyframes animationFrames{
+      0% {
+        transform: translate(-1160px,15px)  ;
+      }
+      100% {
+        transform: translate(0px,15px)  ;
+      }
+    }
+
+    @-moz-keyframes animationFrames{
+      0% {
+        transform: translate(-1160px,15px)  ;
+      }
+      100% {
+        transform: translate(0px,15px)  ;
+      }
+    }
+
+    @-webkit-keyframes animationFrames {
+      0% {
+        transform: translate(-1160px,15px)  ;
+      }
+      100% {
+        transform: translate(0px,15px)  ;
+      }
+    }
+
+    @-o-keyframes animationFrames {
+      0% {
+        transform: translate(-1160px,15px)  ;
+      }
+      100% {
+        transform: translate(-0px,15px)  ;
+      }
+    }
+
+    @-ms-keyframes animationFrames {
+      0% {
+        transform: translate(-1160px,15px)  ;
+      }
+      100% {
+        transform: translate(0px,15px)  ;
+      }
+    }
+    </style>
+
+    <div class="loader-box">
+    	<div class="lable">Loading</div>
+    	<div class="loader">
+            <div class="element-animation">
+            <img src="https://dl.dropboxusercontent.com/u/35259193/loader.png" width="1180" height="70";>
+            </div>
+
+    	</div>
+    </div>
+  </app-root>
+
     <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js"></script>
 </body>

@@ -43,6 +43,11 @@ form {
 }
 
 @media screen and (max-width: 39.9375em) {
+
+  h3 {
+      margin: 0em
+  }
+  
   form label {
     font-size: 1.1em
   }

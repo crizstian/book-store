@@ -1,8 +1,12 @@
-<div class="media-object stack-for-small">
+<div class="media-object stack-for-small"
+  [ngStyle]="hover"
+  (mouseenter)="toggleEffect(true)"
+  (mouseleave)="toggleEffect(false)"
+  >
   <div class="media-object-section">
-    <img src="../../../assets/book.png" style="width: 150px; height: 160px">
+    <img src="../../../assets/book.png" >
   </div>
-  <div class="media-object-section">
+  <div class="media-object-section main-section">
     <h3>{{book.title}}</h3>
 
     <div class="float-right">
@@ -24,8 +28,8 @@
     <br><br>
     <hr>
     <div class="button-group float-right">
-      <a class="button hollow" (click)="viewBook(book._id)"><i class="mdi mdi-arrow-right-drop-circle"></i> Read more</a>
-      <a class="button hollow" (click)="editBook(book._id)"><i class="mdi mdi-border-color"></i> Edit</a>
+      <a class="button" (click)="viewBook(book._id)"><i class="mdi mdi-arrow-right-drop-circle"></i> Read more</a>
+      <a class="button" (click)="editBook(book._id)"><i class="mdi mdi-border-color"></i> Edit</a>
       <a class="button hollow alert" (click)="deleteBook(book._id)"><i class="mdi mdi-delete"></i> Delete</a>
     </div>
   </div>

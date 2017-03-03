@@ -6,11 +6,9 @@
     border-radius: .5em;
 }
 
-.media-object:hover {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    -webkit-transition: box-shadow 0.2s;
-    -moz-transition: box-shadow 0.2s;
-    transition: box-shadow 0.2s;
+.media-object img {
+  width: 150px;
+  height: 160px;
 }
 
 .media-object h3 {
@@ -67,6 +65,16 @@
 }
 
 @media screen and (max-width: 39.9375em) {
+
+  .button-group .button {
+    font-size: 1em
+  }
+
+  .button {
+    padding: .8em .5em
+  }
+
+
     .media-object {
         margin: 0 0 .9em 0;
         padding: 1em;

@@ -3,4 +3,5 @@
 .button {
   background-color: #435779;
   color: rgba(255, 255, 255, 0.9);
+  border-radius: 5%
 }

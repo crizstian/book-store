@@ -20,7 +20,7 @@ declare const $:any
     `],
   template: `
     <div class="main-container">
-      <main class="main">
+      <main class="main product-intro">
          <router-outlet></router-outlet>
       </main>
     </div>

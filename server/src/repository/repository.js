@@ -8,7 +8,7 @@ const repository = (container) => {
       query['_id'] = new Id(options.id)
     }
     if ('title' in options) {
-      query['title'] = options.title
+      query['title'] = new RegExp(`.*${options.title}.*`, 'i')
     }
     if ('author' in options) {
       query['author'] = {

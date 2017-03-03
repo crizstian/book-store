@@ -14,6 +14,10 @@ import {BookService} from '../../services'
         (searchObj)="searchBook($event)">
       </search-book>
       <div [hidden]="!results">
+        <div *ngIf="books.length === 0">
+          <h2>Books not found!</h2>
+          <h4>Search another book</h4>
+        </div>
         <book
           *ngFor="let book of books"
           [book]="book"
@@ -37,7 +41,6 @@ export class Home {
       .subscribe((data) => {
         this.books = data
         this.results = true
-        console.log(data)
       })
   }
 
