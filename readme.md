@@ -30,6 +30,8 @@ the kraken will setup everything automatically for us so it will to put our syst
 - **Web App**
 To use the web app we need to visit the following url `https://192.168.99.100:8080` in a chrome browser for better experience, the browser will ask us if we want to trust the certificate and we need trust it, this happens because we are using self-signed certificates.
 
+In the section where an image is uploaded it uses a fake cdn server to simulate how the image is going to be uploaded and when its uploaded, returns the fake image url, and we update our book object to store the book information on the database.
+
 - **Book Service API**
 The web app will make use of the API calling the following url: `https://192.168.99.100:3000` and here the will the dispatch all the requests need it for, searching, creating, editing, deleting a book, as well as the author.
 

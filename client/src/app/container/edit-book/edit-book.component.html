@@ -2,7 +2,7 @@
   <h2>{{pageTitle}} <i class="mdi mdi-pen"></i> </h2>
 </div>
 
-<form  (ngSubmit)="sendBook(bookForm.value, edit)" #bookForm="ngForm">
+<form  (ngSubmit)="startUpload()" #bookForm="ngForm">
   <fieldset ngModelGroup="book">
     <div class="row">
       <div class="small-12 medium-6 columns">
@@ -166,9 +166,52 @@
 
       <div class="small-12 medium-6 columns">
         <label><i class="mdi mdi-image"></i> Image
-          <input type="file" name="image">
+
+          <div *ngIf="previewData">
+            <h5>Preview image</h5>
+            <img [src]="previewData" style="background: white">
+          </div>
+
+          <div class="drag-n-drop-container file-over"
+                accept="image/x-png, image/jpeg"
+                ngFileDrop
+                [options]="options"
+                (onUpload)="handleUpload($event)"
+                [ngClass]="{'file-over': hasBaseDropZoneOver}"
+                (onFileOver)="fileOverBase($event)">
+            <div *ngIf="!previewData">
+              <h5 align="center">Drag & Drop</h5>
+              <h3 align="center">
+                <i class="mdi mdi-download"></i>
+              </h3>
+            </div>
+            <label class="upload-button">
+              <input type="file"
+                     class="button hidden"
+                     accept="image/x-png, image/jpeg"
+                     ngFileSelect
+                     [options]="options"
+                     [events]="events"
+                     (onUpload)="handleUpload($event)"
+                     (onPreviewData)="handlePreviewData($event)">
+            </label>
+          </div>
         </label>
+
+        <div
+          class="error"
+          [hidden]="priceRef.valid || priceRef.pristine">
+          <p>
+            Price must be filled, it's required.
+          </p>
+        </div>
       </div>
+    </div>
+
+    <div class="progress" role="progressbar" tabindex="0" aria-valuenow="50" aria-valuemin="0" aria-valuetext="50 percent" aria-valuemax="100">
+      <span class="progress-meter" [ngStyle]="progressBar">
+        <p class="progress-meter-text">{{progress}}%</p>
+      </span>
     </div>
 
     <div class="row align-center">
@@ -197,7 +240,6 @@
         >
           Cancel</button>
       </div>
-
     </div>
   </fieldset>
 </form>

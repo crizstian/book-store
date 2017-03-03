@@ -1,7 +1,9 @@
-import {Component, ViewChild} from '@angular/core'
+import {Component, ViewChild, NgZone, Inject, EventEmitter } from '@angular/core';
+import { NgUploaderOptions } from 'ngx-uploader'
 import {Router, ActivatedRoute} from '@angular/router'
 import {BookService, AuthorService, CategoryService, PublisherService} from '../../services'
 import { Observable } from 'rxjs/Observable'
+import { FileUploader } from 'ng2-file-upload'
 import 'rxjs/add/observable/forkJoin'
 import 'rxjs/add/observable/combineLatest'
 import 'rxjs/add/operator/map'
@@ -17,6 +19,7 @@ export class EditBook {
 
   pageTitle: string = ''
   action: string = ''
+  image: any
 
   edit: boolean = false
   dateValidation: boolean = false
@@ -25,7 +28,16 @@ export class EditBook {
   publishers = []
   categories = []
 
+  progressBar: any = { 'width': '0%'}
+  progress: number = 0
+  options: NgUploaderOptions
+  response: any
+  hasBaseDropZoneOver: boolean
+  previewData: any
+  private events: EventEmitter<any> = new EventEmitter()
+
   constructor(
+    @Inject(NgZone) private zone: NgZone,
     private router: Router,
     private route:ActivatedRoute,
     private bookService: BookService,
@@ -36,6 +48,11 @@ export class EditBook {
     const {url} = this.router
     this.setTitle(url)
     this.getDefaults()
+    this.options = new NgUploaderOptions({
+      url: 'http://api.ngx-uploader.com/upload',
+      autoUpload: false,
+      previewUrl: true
+    })
   }
 
   setTitle (route) {
@@ -108,13 +125,43 @@ export class EditBook {
 
  }
 
-  sendBook (bookForm, edit) {
+ handleUpload(data: any) {
+   setTimeout(() => {
+     this.zone.run(() => {
+       this.response = data
+       this.progressBar = {'width': `${data.progress.percent}%`}
+       this.progress = data.progress.percent
+       if (data && data.response) {
+         this.response = JSON.parse(data.response)
+         if (this.progress === 100 && this.book.form.valid) {
+           const book = Object.assign({}, this.book.form.value.book, {url: this.response[0].path})
+           this.sendBook(book, this.edit)
+         }
+       }
+     })
+   })
+ }
+
+ fileOverBase(e: boolean) {
+   this.hasBaseDropZoneOver = e;
+ }
+
+ startUpload() {
+   this.events.emit('startUpload')
+ }
+
+ handlePreviewData(data: any) {
+    this.previewData = data;
+  }
+
+  sendBook (book, edit) {
+    console.log(book)
     if (!edit) {
-      this.bookService.addBook(bookForm)
+      this.bookService.addBook({book})
         .subscribe(data => this.router.navigate(['','browse']))
     } else {
-      const book = Object.assign({}, bookForm.book, {id: this.route.snapshot.params['id']})
-      this.bookService.updateBook({book})
+      const edited = Object.assign({}, book, {id: this.route.snapshot.params['id']})
+      this.bookService.updateBook({book: edited})
         .subscribe(data => this.router.navigate(['','browse']))
     }
   }

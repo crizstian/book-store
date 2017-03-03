@@ -7,7 +7,8 @@ const bookSchema = (joi) => ({
   isbn: joi.string().alphanum().length(13),
   cover: joi.string(),
   publication: joi.date(),
-  category: joi.string()
+  category: joi.string(),
+  url: joi.string()
 })
 
 module.exports = bookSchema

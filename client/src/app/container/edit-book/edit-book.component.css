@@ -7,6 +7,8 @@ h2 {
   color: #435779;
 }
 
+.file-over { border: 3px dotted #435779; }
+
 form label {
   font-size: 1.25em
 }
