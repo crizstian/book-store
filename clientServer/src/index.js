@@ -1,5 +1,6 @@
 'use strict'
 const {EventEmitter} = require('events')
+const fs = require('fs')
 const server = require('./server/server')
 const config = require('./config')
 const mediator = new EventEmitter()
@@ -14,11 +15,10 @@ process.on('uncaughtRejection', (err, promise) => {
   console.error('Unhandled Rejection', err)
 })
 
-try {
-  server.start(config)
-    .then(app => {
-      console.log(`Server started succesfully, running on port: ${config.port}.`)
-    })
-} catch (e) {
-  console.log(e)
-}
+server.start(config)
+  .then(app => {
+    console.log(`Server started succesfully, running on port: ${config.port}.`)
+  })
+  .catch(err => {
+    console.log(err)
+  })

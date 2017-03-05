@@ -1,46 +1,93 @@
-# Book Store example with the MEAN Stack
+# Book Store Management MEAN Stack example
 
-### How to run the Book Store system
+> - A book store management with CRUD operations calls to an API Service
 
-### Stack
-- NodeJS 7.7.0 (installed for local testing only)
-- MongoDB 3.4.2
-- Angular 2.4 with CLI
-- Docker 1.13.1 [For Mac/For Windows/ Linux engine] (installed)
+> - MongoDB database interactions
 
-### Run Command
+> - http/2 server enabled
 
-`$ bash < kraken.sh`
+> - User authentication enabled
 
-### Description
+> - Responsive web design
 
-the kraken will setup everything automatically for us so it will to put our system up and running, the kraken file is composed by the following functions:
-
-- **createDockerMachine**: This function will create a `docker-machine` with a virtualbox driver with its defualts settings for local testing purposes.
-
-- **createDatabase**: This function will call the `setup-database.sh` file, this file automates the creation of a database, creation of users for security and it will start a mongoDB container to have a database up and running.
-
-- **createBackendServer**: This function will create an image and start a backend service called bookstore, where is going to serve an API, so can a frontend service can consume it. It handles all the CRUD operations for books, authors, and related stuff.
-
-- **buildAngularApp**: This function will compile the angular store web app using the `angular-cli` into production mode and move the files to the createClientServer folder to be able to deploy the app into a web server.
-
-- **createClientServer**: The last function will create an image and start a frontend-service, that basically deploys the angular store web app into an express server configured with the http/2 protocol.
-
-## Use the Book Store System
-- **Web App**
-To use the web app we need to visit the following url `https://192.168.99.100:8080` in a chrome browser for better experience, the browser will ask us if we want to trust the certificate and we need trust it, this happens because we are using self-signed certificates.
-
-In the section where an image is uploaded it uses a fake cdn server to simulate how the image is going to be uploaded and when its uploaded, returns the fake image url, and we update our book object to store the book information on the database.
-
-- **Book Service API**
-The web app will make use of the API calling the following url: `https://192.168.99.100:3000` and here the will the dispatch all the requests need it for, searching, creating, editing, deleting a book, as well as the author.
-
-- **MongoDB Database**
-To make use of the database the book service api calls the following ip server: `192.168.99.100:27017`, but to be able to perform the database operations we need to be authenticated.
-
-
-### Snapshot
+#### Preview
 
 ![](./Snapshots.png)
 
+
+### Stack
+- NodeJS 7.7.0 (installed - required)
+- MongoDB 3.4.2
+- Angular 2.4 with CLI
+- Docker 1.13.1 (installed - required)
+
+## Installation
+OS X & Linux:
+```sh
+$ bash < kraken.sh
+```
+Windows:
+```sh
+change linux commands from the kraken.sh file to be able to automate the process
+```
+
+---
+## Usage of the system with docker
+
+#### !IMPORTANT
+
+before starting to deploy our services either in production mode or development mode, we must check and verify the api url, from the angular *api.service.ts* to be the same ip that the *docker-machine-ip*
+
+#### Get the docker-machine ip
+First of all we need to know what is the ip of our docker-machine to get the ip we need to execute the following command:
+
+`$ docker-machine ip dimtec`
+
+---
+### Description of usage
+**Web App**:
+
+To use the web app we need to visit the following url:
+`https://{{docker-machine-ip}}:8080` in a chrome browser for better experience, the browser will ask us if we want to trust the certificate and we need trust it, this happens because we are using self-signed certificates.
+
+In the section where an image is uploaded it uses a fake cdn server to simulate how the image is going to be uploaded and when its uploaded, returns the fake image url, and we update our book object to store the book information on the database.
+
+**Book Service API**
+
+The web app will make use of the API calling the following url: `https://{{docker-machine-ip}}:3000` and here the will the dispatch all the requests need it for, searching, creating, editing, deleting a book, as well as the author.
+
+**MongoDB Database**
+
+To make use of the database the book service api calls the following ip server: `{{docker-machine-ip}}:27017` but to be able to perform the database operations we need to be authenticated.
+
+---
+## Usage of the system without docker
+## Development setup
+
+**Angular app**
+
+To run the angular app we need to position it in the client folder and run the following command:
+
+```
+$ npm start
+```
+
+This will run the `angular-cli` command `ng serve` that will deploy the angular app in a webpack integrated server for testing at the url `http://localhost:4200`.
+
+**Server API**
+
+To start the server api, we need to be position it at the server folder and run the command:
+
+```
+$ npm start
+```
+
+this will start the api service at the following url: `http://localhost:3000`
+
+**Database**
+
+The database will be configured automatically with the script located at the database folder and will be listening at the following url: `{{docker-machine-ip}}:27017`
+
+---
+#### Preview
 ![](./Snapshots2.png)
