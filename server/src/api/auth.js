@@ -4,6 +4,7 @@ const status = require('http-status')
 module.exports = (app, repo) => {
   app.post('/signup', async (req, res, next) => {
     try {
+      console.log(req.body.user)
       const result = await repo.createUser(req.body.user)
       res.status(status.OK).json({token: result})
     } catch (e) {

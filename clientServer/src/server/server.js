@@ -28,12 +28,12 @@ const start = (config) => {
       res.sendFile(path.join(__dirname + '/dist/index.html'));
     })
 
-    if (process.env.NODE === 'test') {
+    // if (process.env.NODE === 'test') {
       const server = app.listen(port, () => resolve(server))
-    } else {
-      const server = spdy.createServer(ssl, app)
-        .listen(port, () => resolve(server))
-    }
+    // } else {
+    //   const server = spdy.createServer(ssl, app)
+    //     .listen(port, () => resolve(server))
+    // }
   })
 }
 

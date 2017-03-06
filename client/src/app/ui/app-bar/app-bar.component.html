@@ -38,7 +38,7 @@
           </span> Browse
         </a>
       </li>
-      <li>
+      <li >
         <a
           [routerLink]="['', 'add']"
           routerLinkActive="active"
@@ -56,13 +56,14 @@
           [routerLink]="['', 'login']"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}"
+          (click)="signout()"
           >
           <span
             class="show-for-small-only"
             (click)="onSelectedPage()"
             >
             <i class="mdi mdi-plus-circle"></i>
-          </span> Login
+          </span> {{isLoggedIn ? 'Signout' : 'Login'}}
       </a></li>
     </ul>
   </div>

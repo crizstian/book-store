@@ -11,8 +11,8 @@ export class ApiService {
     Accept: 'application/json'
   });
 
-  // api_url: string = 'https://192.168.99.100:3000'
-  api_url: string = 'https://localhost:3000'
+  api_url: string = 'http://192.168.99.100:3000'
+  // api_url: string = 'https://localhost:3000'
 
   constructor(private http: Http) {
     console.log(this.api_url)

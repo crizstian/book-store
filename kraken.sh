@@ -21,6 +21,8 @@ function buildAngularApp {
 
   rm -rf dist/
 
+  rm -rf ../clientServer/src/server/dist
+
   (npm run build)
 
   mv dist/ ../clientServer/src/server

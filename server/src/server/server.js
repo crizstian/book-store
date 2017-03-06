@@ -31,12 +31,14 @@ const start = (container) => {
 
     api(app, container)
 
-    if (process.env.NODE === 'test') {
+    console.log(process.env.NODE)
+
+    // if (process.env.NODE === 'test') {
       const server = app.listen(port, () => resolve(server))
-    } else {
-      const server = spdy.createServer(ssl, app)
-        .listen(port, () => resolve(server))
-    }
+    // } else {
+    //   const server = spdy.createServer(ssl, app)
+    //     .listen(port, () => resolve(server))
+    // }
   })
 }
 

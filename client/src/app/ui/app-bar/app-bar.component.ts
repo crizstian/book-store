@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core'
+import {Component, Input, OnInit} from '@angular/core'
 import { AuthService } from '../../services/auth.service'
 
 declare var $:any
@@ -61,14 +61,23 @@ declare var $:any
     `],
     templateUrl: './app-bar.component.html'
 })
-export class AppBar {
+export class AppBar implements OnInit {
   title:string = 'Book Store'
+  isLoggedIn: boolean
   routes = []
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) {}
+
+  ngOnInit () {
+    this.isLoggedIn = this.auth.isAuthorized()
+    console.log(this.isLoggedIn)
+  }
 
   signout () {
-    this.auth.signout()
+    if (this.isLoggedIn) {
+      this.auth.signout()
+      this.isLoggedIn = this.auth.isAuthorized()
+    }
   }
 
   onSelectedPage () {

@@ -14,6 +14,7 @@
     "test": "mocha -R spec **/*.spec.js",
     "start": "node src/index.js",
     "lint": "standard --verbose | snazzy",
+    "test-mode": "NODE='test' node src/index.js",
     "node-debug": "DEBUG=express* nodemon src/index.js",
     "chrome-debug": "nodemon --debug-brk --inspect src/index.js"
   },
