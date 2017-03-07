@@ -10,7 +10,7 @@
   </div>
   <div class="row">
     <ul class="vertical medium-horizontal menu align-center">
-      <li>
+      <li *ngIf="isLoggedIn">
         <a
           [routerLink]="['']"
           routerLinkActive="active"
@@ -24,7 +24,7 @@
           </span> Home
         </a>
       </li>
-      <li>
+      <li *ngIf="isLoggedIn">
         <a
           [routerLink]="['', 'browse']"
           routerLinkActive="active"
@@ -38,7 +38,7 @@
           </span> Browse
         </a>
       </li>
-      <li >
+      <li *ngIf="isLoggedIn" >
         <a
           [routerLink]="['', 'add']"
           routerLinkActive="active"
