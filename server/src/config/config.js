@@ -2,7 +2,7 @@ const dbSettings = {
   db: process.env.DB || 'bookstore',
   user: process.env.DB_USER || 'cris',
   pass: process.env.DB_PASS || 'bookstorepass1',
-  server: process.env.DB_SERVER || '192.168.99.100:27017',
+  server: process.env.DB_SERVER || '127.0.0.1:27017',
   get url () {
     return `mongodb://${this.server}/admin?w=1,j=true`
   }

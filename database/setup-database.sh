@@ -1,4 +1,4 @@
-eval `docker-machine env dimtec`
+# eval `docker-machine env dimtec`
 
 function createDockerVolume {
   cmd=$(docker volume ls -q | grep $1)
