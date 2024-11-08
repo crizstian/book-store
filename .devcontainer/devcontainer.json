@@ -1,3 +1,5 @@
 {
-    "image": "crizstian/golang:vscode"
+    "image": "crizstian/golang:vscode",
+    "postCreateCommand": "go version",
+    "remoteUser": "root"
 }
